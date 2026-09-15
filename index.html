@@ -231,6 +231,116 @@
   a.rgn.nc .edge path { fill: url(#hatch); stroke-dasharray: 6 4; }
   a.rgn.nc:hover .edge path, a.rgn.nc:focus-visible .edge path { fill: url(#hatch); }
 
+  /* --------------------------------------------------------------- the rail -- */
+
+  /*  THE PHOTOGRAPHS ARE A LIST, and the markup says so: a <ul> of <li>, one per
+      picture, each carrying its own frame style as a class.  Adding a photograph is
+      adding a line.  Everything below is presentation over that list, so with the
+      stylesheet gone it is still a legible list of images. */
+  .rail {
+    list-style: none;
+    margin: 0;
+    padding: .6rem .2rem 1rem;
+    display: flex;
+    align-items: flex-end;
+    gap: clamp(1rem, 2.6vw, 2.2rem);
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x proximity;
+    /*  Room for the clips and the wave crests, which both sit OUTSIDE the picture. */
+    padding-left: 1.4rem;
+    padding-right: 1.4rem;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(207,214,230,.35) transparent;
+  }
+  .rail::-webkit-scrollbar { height: 9px; }
+  .rail::-webkit-scrollbar-track { background: rgba(0,0,0,.18); border-radius: 5px; }
+  .rail::-webkit-scrollbar-thumb { background: rgba(207,214,230,.3); border-radius: 5px; }
+  .rail::-webkit-scrollbar-thumb:hover { background: rgba(207,214,230,.5); }
+
+  /*  NOTHING IS CROPPED.  Every picture is given the same HEIGHT and keeps its own
+      aspect, so a portrait is narrow and a landscape is wide and neither is cut to
+      fit a slot.  That is the difference between a rail and a grid, and it is why
+      the rail earned the photographs a scroll instead of a crop. */
+  .shot {
+    position: relative;
+    flex: 0 0 auto;
+    height: clamp(210px, 42vh, 420px);
+    scroll-snap-align: center;
+  }
+  .shot img {
+    display: block;
+    height: 100%;
+    width: auto;
+    /*  The dark line under everything: easel's own answer to an edge that would not
+        read as an edge against its ground (frames/README.md, 2026-08-30). */
+    box-shadow: 0 0 0 1px rgba(0,0,0,.63), 0 10px 26px rgba(0,0,0,.34);
+  }
+
+  /*  ONE STYLE PER PICTURE, never both.  A frame is a decision about the edge, and
+      two decisions about one edge is an argument.  `clips` keeps the straight edge
+      and hangs metal on the corners; `wave` cuts the edge itself and hangs nothing. */
+
+  /*  CLIPS: the picture stays a rectangle and four metal corners straddle it.  Pure
+      CSS -- the artwork is drawn for the upper left, so the other three are the same
+      file turned 90 degrees at a time.  `PIVOT` is easel's 14/72 straddle, which is
+      why each sits partly off the picture. */
+  .shot.clips .cl {
+    position: absolute;
+    width: 21%;
+    max-width: 62px;
+    aspect-ratio: 1;
+    background: url("clips/clip-gold.png") center / contain no-repeat;
+    pointer-events: none;
+  }
+  .shot.clips .cl.ul { left: -3.9%; top: 0; transform: translateY(-13%); }
+  .shot.clips .cl.ur { right: -3.9%; top: 0; transform: translateY(-13%) rotate(90deg); }
+  .shot.clips .cl.lr { right: -3.9%; bottom: 0; transform: translateY(13%) rotate(180deg); }
+  .shot.clips .cl.ll { left: -3.9%; bottom: 0; transform: translateY(13%) rotate(270deg); }
+
+  /*  WAVE: the silhouette itself is the frame, so the picture is clipped to the sine
+      and the same path is stroked over it.  The box-shadow edge cannot follow a
+      clip-path, so it is turned off here and the stroke does that job instead. */
+  .shot.wave img { box-shadow: none; }
+  .shot .edgepath {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: visible;
+  }
+  .shot .edgepath .under { fill: none; stroke: #000; stroke-opacity: .55; stroke-width: 5; }
+  .shot .edgepath .over  { fill: none; stroke: #cfe4ff; stroke-opacity: .85; stroke-width: 2; }
+
+  /*  Easel's `.rid`, as HTML: monospace, semibold, and shadowed hard enough to stay
+      legible over whatever the picture happens to be showing. */
+  .shot .rid-p {
+    position: absolute;
+    left: .7rem;
+    top: .5rem;
+    font: 600 .72rem/1 var(--mono);
+    color: #fff;
+    text-shadow: 0 0 4px #000, 0 0 2px #000;
+    pointer-events: none;
+  }
+
+  /*  THE RAIL HAS TO LOOK SCROLLABLE, or it is a row that mysteriously cuts off.  A
+      fade at each end says there is more that way; it is decoration only, so the
+      real scrollbar stays visible underneath rather than being hidden behind it. */
+  .railwrap { position: relative; }
+  .railwrap::before, .railwrap::after {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0;
+    width: clamp(1.4rem, 3vw, 3rem);
+    pointer-events: none;
+    z-index: 2;
+  }
+  .railwrap::before { left: 0;  background: linear-gradient(90deg, var(--felt), rgba(27,42,78,0)); }
+  .railwrap::after  { right: 0; background: linear-gradient(270deg, var(--felt), rgba(27,42,78,0)); }
+  .rail:focus-visible { outline: 2px solid var(--cur); outline-offset: -2px; }
+
   /* ------------------------------------------------------------- the signature -- */
 
   /*  Last thing before the footer: the hand, after the work rather than in front of it. */
@@ -307,124 +417,51 @@
 <main>
 
   <section class="wall">
-  <!-- WALL-BEGIN  generated by scratchpad/genwall.py; do not hand-edit -->
-  <svg class="canvas wide" viewBox="0 0 1600 560" role="img"
-       aria-label="An easel wall on navy felt: two photographs of cats hung in frames with sine-wave edges and metal corner clips, inside a dashed edge guide, with one empty hatched slot beside them.">
-    <defs>
-      <clipPath id="fr-wa"><path d="M188.0 74.0 Q231.0 60.0 274.0 74.0 Q317.0 88.0 360.0 74.0 Q403.0 60.0 446.0 74.0 Q489.0 88.0 532.0 74.0 Q546.0 125.8 532.0 177.5 Q518.0 229.2 532.0 281.0 Q546.0 332.8 532.0 384.5 Q518.0 436.2 532.0 488.0 Q489.0 502.0 446.0 488.0 Q403.0 474.0 360.0 488.0 Q317.0 502.0 274.0 488.0 Q231.0 474.0 188.0 488.0 Q174.0 436.2 188.0 384.5 Q202.0 332.8 188.0 281.0 Q174.0 229.2 188.0 177.5 Q202.0 125.8 188.0 74.0 Z"/></clipPath>
-      <clipPath id="fr-wb"><path d="M618.0 74.0 Q663.5 60.0 709.0 74.0 Q754.5 88.0 800.0 74.0 Q845.5 60.0 891.0 74.0 Q936.5 88.0 982.0 74.0 Q996.0 125.8 982.0 177.5 Q968.0 229.2 982.0 281.0 Q996.0 332.8 982.0 384.5 Q968.0 436.2 982.0 488.0 Q936.5 502.0 891.0 488.0 Q845.5 474.0 800.0 488.0 Q754.5 502.0 709.0 488.0 Q663.5 474.0 618.0 488.0 Q604.0 436.2 618.0 384.5 Q632.0 332.8 618.0 281.0 Q604.0 229.2 618.0 177.5 Q632.0 125.8 618.0 74.0 Z"/></clipPath>
-    </defs>
-
-    <!--  THE EDGE MARGIN GUIDE. "A GUIDE IS NOT GEOMETRY": dashed, unfilled, inert. -->
-    <rect x="28" y="28" width="1544" height="504" fill="none"
-          stroke="#cfd6e6" stroke-opacity=".30" stroke-width="1.5" stroke-dasharray="6 5" rx="2"/>
-    <text class="glbl" x="36" y="46">edge</text>
-
-    <g>
-      <image href="beasts/beast-1.jpg" x="170" y="56" width="380" height="450"
-             preserveAspectRatio="xMidYMid slice" clip-path="url(#fr-wa)"/>
-      <path d="M188.0 74.0 Q231.0 60.0 274.0 74.0 Q317.0 88.0 360.0 74.0 Q403.0 60.0 446.0 74.0 Q489.0 88.0 532.0 74.0 Q546.0 125.8 532.0 177.5 Q518.0 229.2 532.0 281.0 Q546.0 332.8 532.0 384.5 Q518.0 436.2 532.0 488.0 Q489.0 502.0 446.0 488.0 Q403.0 474.0 360.0 488.0 Q317.0 502.0 274.0 488.0 Q231.0 474.0 188.0 488.0 Q174.0 436.2 188.0 384.5 Q202.0 332.8 188.0 281.0 Q174.0 229.2 188.0 177.5 Q202.0 125.8 188.0 74.0 Z" fill="none" stroke="#000" stroke-opacity=".63" stroke-width="3"
-            vector-effect="non-scaling-stroke"/>
-      <path d="M188.0 74.0 Q231.0 60.0 274.0 74.0 Q317.0 88.0 360.0 74.0 Q403.0 60.0 446.0 74.0 Q489.0 88.0 532.0 74.0 Q546.0 125.8 532.0 177.5 Q518.0 229.2 532.0 281.0 Q546.0 332.8 532.0 384.5 Q518.0 436.2 532.0 488.0 Q489.0 502.0 446.0 488.0 Q403.0 474.0 360.0 488.0 Q317.0 502.0 274.0 488.0 Q231.0 474.0 188.0 488.0 Q174.0 436.2 188.0 384.5 Q202.0 332.8 188.0 281.0 Q174.0 229.2 188.0 177.5 Q202.0 125.8 188.0 74.0 Z" fill="none" stroke="#78C8FF" stroke-width="1.5"
-            vector-effect="non-scaling-stroke"/>
-      <image href="clips/clip-gold.png" x="158.7" y="44.7" width="58" height="58"/>
-      <image href="clips/clip-gold.png" x="503.3" y="44.7" width="58" height="58" transform="rotate(90 532.3 73.7)"/>
-      <image href="clips/clip-gold.png" x="503.3" y="459.3" width="58" height="58" transform="rotate(180 532.3 488.3)"/>
-      <image href="clips/clip-gold.png" x="158.7" y="459.3" width="58" height="58" transform="rotate(270 187.7 488.3)"/>
-      <text class="rid" x="196" y="92">beast-1</text>
-    </g>
-
-    <g>
-      <rect x="600" y="56" width="400" height="450" fill="#78C8FF" fill-opacity=".07"/>
-      <image href="beasts/beast-2.jpg" x="600" y="56" width="400" height="450"
-             preserveAspectRatio="xMidYMin slice" clip-path="url(#fr-wb)"/>
-      <path d="M618.0 74.0 Q663.5 60.0 709.0 74.0 Q754.5 88.0 800.0 74.0 Q845.5 60.0 891.0 74.0 Q936.5 88.0 982.0 74.0 Q996.0 125.8 982.0 177.5 Q968.0 229.2 982.0 281.0 Q996.0 332.8 982.0 384.5 Q968.0 436.2 982.0 488.0 Q936.5 502.0 891.0 488.0 Q845.5 474.0 800.0 488.0 Q754.5 502.0 709.0 488.0 Q663.5 474.0 618.0 488.0 Q604.0 436.2 618.0 384.5 Q632.0 332.8 618.0 281.0 Q604.0 229.2 618.0 177.5 Q632.0 125.8 618.0 74.0 Z" fill="none" stroke="#000" stroke-opacity=".63" stroke-width="3"
-            vector-effect="non-scaling-stroke"/>
-      <path d="M618.0 74.0 Q663.5 60.0 709.0 74.0 Q754.5 88.0 800.0 74.0 Q845.5 60.0 891.0 74.0 Q936.5 88.0 982.0 74.0 Q996.0 125.8 982.0 177.5 Q968.0 229.2 982.0 281.0 Q996.0 332.8 982.0 384.5 Q968.0 436.2 982.0 488.0 Q936.5 502.0 891.0 488.0 Q845.5 474.0 800.0 488.0 Q754.5 502.0 709.0 488.0 Q663.5 474.0 618.0 488.0 Q604.0 436.2 618.0 384.5 Q632.0 332.8 618.0 281.0 Q604.0 229.2 618.0 177.5 Q632.0 125.8 618.0 74.0 Z" fill="none" stroke="#fff" stroke-width="1.5"
-            vector-effect="non-scaling-stroke"/>
-      <image href="clips/clip-gold.png" x="588.7" y="44.7" width="58" height="58"/>
-      <image href="clips/clip-gold.png" x="953.3" y="44.7" width="58" height="58" transform="rotate(90 982.3 73.7)"/>
-      <image href="clips/clip-gold.png" x="953.3" y="459.3" width="58" height="58" transform="rotate(180 982.3 488.3)"/>
-      <image href="clips/clip-gold.png" x="588.7" y="459.3" width="58" height="58" transform="rotate(270 617.7 488.3)"/>
-      <text class="rid" x="626" y="92">beast-2</text>
-      <g fill="#fff" stroke="#000" stroke-width="1" shape-rendering="crispEdges">
-        <rect x="593" y="49" width="14" height="14" rx="2"/>
-        <rect x="793" y="49" width="14" height="14" rx="2"/>
-        <rect x="993" y="49" width="14" height="14" rx="2"/>
-        <rect x="593" y="274" width="14" height="14" rx="2"/>
-        <rect x="993" y="274" width="14" height="14" rx="2"/>
-        <rect x="593" y="499" width="14" height="14" rx="2"/>
-        <rect x="793" y="499" width="14" height="14" rx="2"/>
-        <rect x="993" y="499" width="14" height="14" rx="2"/>
-      </g>
-    </g>
-
-    <g>
-      <rect x="1050" y="56" width="380" height="450" fill="url(#hatch-wall)"
-            stroke="#78C8FF" stroke-width="1.5" stroke-dasharray="6 4"/>
-      <text class="rid" x="1076" y="92">slot</text>
-    </g>
-  </svg>
-
-  <svg class="canvas tall" viewBox="0 0 900 900" role="img"
-       aria-label="The same wall stacked for a narrow screen: two photographs of cats in sine-edged frames with metal corner clips, above an empty hatched slot.">
-    <defs>
-      <clipPath id="fr-ta"><path d="M74.0 74.0 Q117.0 60.0 160.0 74.0 Q203.0 88.0 246.0 74.0 Q289.0 60.0 332.0 74.0 Q375.0 88.0 418.0 74.0 Q432.0 110.6 418.0 147.2 Q404.0 183.8 418.0 220.3 Q432.0 256.9 418.0 293.5 Q404.0 330.1 418.0 366.7 Q432.0 403.2 418.0 439.8 Q404.0 476.4 418.0 513.0 Q375.0 527.0 332.0 513.0 Q289.0 499.0 246.0 513.0 Q203.0 527.0 160.0 513.0 Q117.0 499.0 74.0 513.0 Q60.0 476.4 74.0 439.8 Q88.0 403.2 74.0 366.7 Q60.0 330.1 74.0 293.5 Q88.0 256.9 74.0 220.3 Q60.0 183.8 74.0 147.2 Q88.0 110.6 74.0 74.0 Z"/></clipPath>
-      <clipPath id="fr-tb"><path d="M482.0 74.0 Q525.0 60.0 568.0 74.0 Q611.0 88.0 654.0 74.0 Q697.0 60.0 740.0 74.0 Q783.0 88.0 826.0 74.0 Q840.0 110.6 826.0 147.2 Q812.0 183.8 826.0 220.3 Q840.0 256.9 826.0 293.5 Q812.0 330.1 826.0 366.7 Q840.0 403.2 826.0 439.8 Q812.0 476.4 826.0 513.0 Q783.0 527.0 740.0 513.0 Q697.0 499.0 654.0 513.0 Q611.0 527.0 568.0 513.0 Q525.0 499.0 482.0 513.0 Q468.0 476.4 482.0 439.8 Q496.0 403.2 482.0 366.7 Q468.0 330.1 482.0 293.5 Q496.0 256.9 482.0 220.3 Q468.0 183.8 482.0 147.2 Q496.0 110.6 482.0 74.0 Z"/></clipPath>
-    </defs>
-
-    <!--  THE EDGE MARGIN GUIDE. "A GUIDE IS NOT GEOMETRY": dashed, unfilled, inert. -->
-    <rect x="28" y="28" width="844" height="844" fill="none"
-          stroke="#cfd6e6" stroke-opacity=".30" stroke-width="1.5" stroke-dasharray="6 5" rx="2"/>
-    <text class="glbl" x="36" y="46">edge</text>
-
-    <g>
-      <image href="beasts/beast-1.jpg" x="56" y="56" width="380" height="475"
-             preserveAspectRatio="xMidYMid slice" clip-path="url(#fr-ta)"/>
-      <path d="M74.0 74.0 Q117.0 60.0 160.0 74.0 Q203.0 88.0 246.0 74.0 Q289.0 60.0 332.0 74.0 Q375.0 88.0 418.0 74.0 Q432.0 110.6 418.0 147.2 Q404.0 183.8 418.0 220.3 Q432.0 256.9 418.0 293.5 Q404.0 330.1 418.0 366.7 Q432.0 403.2 418.0 439.8 Q404.0 476.4 418.0 513.0 Q375.0 527.0 332.0 513.0 Q289.0 499.0 246.0 513.0 Q203.0 527.0 160.0 513.0 Q117.0 499.0 74.0 513.0 Q60.0 476.4 74.0 439.8 Q88.0 403.2 74.0 366.7 Q60.0 330.1 74.0 293.5 Q88.0 256.9 74.0 220.3 Q60.0 183.8 74.0 147.2 Q88.0 110.6 74.0 74.0 Z" fill="none" stroke="#000" stroke-opacity=".63" stroke-width="3"
-            vector-effect="non-scaling-stroke"/>
-      <path d="M74.0 74.0 Q117.0 60.0 160.0 74.0 Q203.0 88.0 246.0 74.0 Q289.0 60.0 332.0 74.0 Q375.0 88.0 418.0 74.0 Q432.0 110.6 418.0 147.2 Q404.0 183.8 418.0 220.3 Q432.0 256.9 418.0 293.5 Q404.0 330.1 418.0 366.7 Q432.0 403.2 418.0 439.8 Q404.0 476.4 418.0 513.0 Q375.0 527.0 332.0 513.0 Q289.0 499.0 246.0 513.0 Q203.0 527.0 160.0 513.0 Q117.0 499.0 74.0 513.0 Q60.0 476.4 74.0 439.8 Q88.0 403.2 74.0 366.7 Q60.0 330.1 74.0 293.5 Q88.0 256.9 74.0 220.3 Q60.0 183.8 74.0 147.2 Q88.0 110.6 74.0 74.0 Z" fill="none" stroke="#78C8FF" stroke-width="1.5"
-            vector-effect="non-scaling-stroke"/>
-      <image href="clips/clip-gold.png" x="44.7" y="44.7" width="58" height="58"/>
-      <image href="clips/clip-gold.png" x="389.3" y="44.7" width="58" height="58" transform="rotate(90 418.3 73.7)"/>
-      <image href="clips/clip-gold.png" x="389.3" y="484.3" width="58" height="58" transform="rotate(180 418.3 513.3)"/>
-      <image href="clips/clip-gold.png" x="44.7" y="484.3" width="58" height="58" transform="rotate(270 73.7 513.3)"/>
-      <text class="rid" x="82" y="92">beast-1</text>
-    </g>
-
-    <g>
-      <rect x="464" y="56" width="380" height="475" fill="#78C8FF" fill-opacity=".07"/>
-      <image href="beasts/beast-2.jpg" x="464" y="56" width="380" height="475"
-             preserveAspectRatio="xMidYMin slice" clip-path="url(#fr-tb)"/>
-      <path d="M482.0 74.0 Q525.0 60.0 568.0 74.0 Q611.0 88.0 654.0 74.0 Q697.0 60.0 740.0 74.0 Q783.0 88.0 826.0 74.0 Q840.0 110.6 826.0 147.2 Q812.0 183.8 826.0 220.3 Q840.0 256.9 826.0 293.5 Q812.0 330.1 826.0 366.7 Q840.0 403.2 826.0 439.8 Q812.0 476.4 826.0 513.0 Q783.0 527.0 740.0 513.0 Q697.0 499.0 654.0 513.0 Q611.0 527.0 568.0 513.0 Q525.0 499.0 482.0 513.0 Q468.0 476.4 482.0 439.8 Q496.0 403.2 482.0 366.7 Q468.0 330.1 482.0 293.5 Q496.0 256.9 482.0 220.3 Q468.0 183.8 482.0 147.2 Q496.0 110.6 482.0 74.0 Z" fill="none" stroke="#000" stroke-opacity=".63" stroke-width="3"
-            vector-effect="non-scaling-stroke"/>
-      <path d="M482.0 74.0 Q525.0 60.0 568.0 74.0 Q611.0 88.0 654.0 74.0 Q697.0 60.0 740.0 74.0 Q783.0 88.0 826.0 74.0 Q840.0 110.6 826.0 147.2 Q812.0 183.8 826.0 220.3 Q840.0 256.9 826.0 293.5 Q812.0 330.1 826.0 366.7 Q840.0 403.2 826.0 439.8 Q812.0 476.4 826.0 513.0 Q783.0 527.0 740.0 513.0 Q697.0 499.0 654.0 513.0 Q611.0 527.0 568.0 513.0 Q525.0 499.0 482.0 513.0 Q468.0 476.4 482.0 439.8 Q496.0 403.2 482.0 366.7 Q468.0 330.1 482.0 293.5 Q496.0 256.9 482.0 220.3 Q468.0 183.8 482.0 147.2 Q496.0 110.6 482.0 74.0 Z" fill="none" stroke="#fff" stroke-width="1.5"
-            vector-effect="non-scaling-stroke"/>
-      <image href="clips/clip-gold.png" x="452.7" y="44.7" width="58" height="58"/>
-      <image href="clips/clip-gold.png" x="797.3" y="44.7" width="58" height="58" transform="rotate(90 826.3 73.7)"/>
-      <image href="clips/clip-gold.png" x="797.3" y="484.3" width="58" height="58" transform="rotate(180 826.3 513.3)"/>
-      <image href="clips/clip-gold.png" x="452.7" y="484.3" width="58" height="58" transform="rotate(270 481.7 513.3)"/>
-      <text class="rid" x="490" y="92">beast-2</text>
-      <g fill="#fff" stroke="#000" stroke-width="1" shape-rendering="crispEdges">
-        <rect x="457" y="49" width="14" height="14" rx="2"/>
-        <rect x="647" y="49" width="14" height="14" rx="2"/>
-        <rect x="837" y="49" width="14" height="14" rx="2"/>
-        <rect x="457" y="286" width="14" height="14" rx="2"/>
-        <rect x="837" y="286" width="14" height="14" rx="2"/>
-        <rect x="457" y="524" width="14" height="14" rx="2"/>
-        <rect x="647" y="524" width="14" height="14" rx="2"/>
-        <rect x="837" y="524" width="14" height="14" rx="2"/>
-      </g>
-    </g>
-
-    <g>
-      <rect x="56" y="560" width="788" height="284" fill="url(#hatch-wall)"
-            stroke="#78C8FF" stroke-width="1.5" stroke-dasharray="6 4"/>
-      <text class="rid" x="82" y="596">slot</text>
-    </g>
-  </svg>
-  <!-- WALL-END -->
-    <p class="cap">wall · 2 framed · 1 <b>selected</b> · 1 slot · felt navy-mid · frames: sine, period 170, amp 7 · gold clips</p>
+  <!-- RAIL-BEGIN  generated by scratchpad/genrail.py; do not hand-edit -->
+  <div class="railwrap">
+    <ul class="rail" tabindex="0" role="region" aria-label="Photographs">
+      <li class="shot clips">
+        <img src="photos/p-0667.jpg" alt="A tabby-and-white cat sitting upright on a carpeted cat tower."
+             width="1200" height="1600" loading="eager" decoding="async">
+        <span class="cl ul"></span><span class="cl ur"></span><span class="cl lr"></span><span class="cl ll"></span>
+        <span class="rid-p">p-0667</span>
+      </li>
+      <li class="shot wave">
+        <img src="photos/p-0677.jpg" alt="Two tabby cats lying side by side on top of a kitchen cabinet, looking down."
+             width="1200" height="1600" loading="eager" decoding="async">
+        <span class="rid-p">p-0677</span>
+      </li>
+      <li class="shot clips">
+        <img src="photos/p-0645.jpg" alt="Two cats resting in separate round wall pods, one above the other."
+             width="1200" height="1600" loading="eager" decoding="async">
+        <span class="cl ul"></span><span class="cl ur"></span><span class="cl lr"></span><span class="cl ll"></span>
+        <span class="rid-p">p-0645</span>
+      </li>
+      <li class="shot wave">
+        <img src="photos/p-0511.jpg" alt="A tabby-and-white cat loafing on a bright blue shag rug."
+             width="1200" height="1600" loading="lazy" decoding="async">
+        <span class="rid-p">p-0511</span>
+      </li>
+      <li class="shot clips">
+        <img src="photos/p-0527.jpg" alt="A tabby cat curled up asleep inside a flat cardboard box."
+             width="1600" height="1200" loading="lazy" decoding="async">
+        <span class="cl ul"></span><span class="cl ur"></span><span class="cl lr"></span><span class="cl ll"></span>
+        <span class="rid-p">p-0527</span>
+      </li>
+      <li class="shot wave">
+        <img src="photos/p-6328.jpg" alt="Two tabby cats on a maple shelving unit beside soft pet carriers."
+             width="1200" height="1600" loading="lazy" decoding="async">
+        <span class="rid-p">p-6328</span>
+      </li>
+      <li class="shot clips">
+        <img src="photos/p-4532.jpg" alt="A single-storey house seen from the street on a clear day, a car in the driveway."
+             width="1600" height="1200" loading="lazy" decoding="async">
+        <span class="cl ul"></span><span class="cl ur"></span><span class="cl lr"></span><span class="cl ll"></span>
+        <span class="rid-p">p-4532</span>
+      </li>
+    </ul>
+  </div>
+  <!-- RAIL-END -->
   </section>
 
   <div class="col">
@@ -497,6 +534,109 @@
     <span><code>ee5.net</code></span>
   </div>
 </footer>
+
+<script>
+/*  THE WAVE FRAME ON THE PHOTOGRAPHS.
+
+    Only `.shot.wave` needs a script at all: the `clips` style is four rotated
+    background images and is done entirely in CSS.  Here the picture is clipped
+    to a sine silhouette and the same path is stroked over it, twice -- a dark
+    line under a light one, which is easel's answer to an edge that would
+    otherwise disappear into whatever it is standing on.
+
+    The path is rebuilt from the rendered size rather than scaled, so period and
+    amplitude stay constant however tall the rail is drawn: the point of
+    `docs/nine-slice-or-geometry.md`, where no band of the silhouette repeats. */
+(function () {
+  'use strict';
+  var PERIOD = 150, AMP = 9, STROKE = 2;
+  var SVGNS = 'http://www.w3.org/2000/svg';
+
+  function sineRect(w, h) {
+    var inset = AMP + STROKE, d = [], started = false;
+    var bw = w - 2 * inset, bh = h - 2 * inset;
+    if (bw < 4 * AMP || bh < 4 * AMP) return '';
+    function edge(len, fn) {
+      var n = Math.max(1, Math.round(len / PERIOD)), half = len / (2 * n), k, s, c, e;
+      if (!started) { var p = fn(0, 0); d.push('M' + p[0].toFixed(1) + ' ' + p[1].toFixed(1)); started = true; }
+      for (k = 0; k < 2 * n; k++) {
+        s = (k % 2 === 0) ? 2 * AMP : -2 * AMP;
+        c = fn((k + 0.5) * half, s);
+        e = fn((k + 1) * half, 0);
+        d.push('Q' + c[0].toFixed(1) + ' ' + c[1].toFixed(1) + ' ' + e[0].toFixed(1) + ' ' + e[1].toFixed(1));
+      }
+    }
+    edge(bw, function (t, o) { return [inset + t, inset - o]; });
+    edge(bh, function (t, o) { return [inset + bw + o, inset + t]; });
+    edge(bw, function (t, o) { return [inset + bw - t, inset + bh + o]; });
+    edge(bh, function (t, o) { return [inset - o, inset + bh - t]; });
+    return d.join(' ') + ' Z';
+  }
+
+  function draw(shot) {
+    var img = shot.querySelector('img');
+    if (!img) return;
+    var w = img.offsetWidth, h = img.offsetHeight;
+    // A frame built from a zero measurement is an outline drawn around nothing.
+    // The markup carries width/height so this should not happen, but a stylesheet
+    // that has not applied yet can still report zero, so it is checked anyway.
+    if (!w || !h) return;
+    var dd = sineRect(w, h);
+    if (!dd) return;
+    img.style.clipPath = 'path("' + dd + '")';
+    var svg = shot.querySelector('svg.edgepath');
+    if (!svg) {
+      svg = document.createElementNS(SVGNS, 'svg');
+      svg.setAttribute('class', 'edgepath');
+      svg.setAttribute('aria-hidden', 'true');
+      svg.setAttribute('focusable', 'false');
+      ['under', 'over'].forEach(function (cls) {
+        var p = document.createElementNS(SVGNS, 'path');
+        p.setAttribute('class', cls);
+        svg.appendChild(p);
+      });
+      shot.appendChild(svg);
+    }
+    svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+    svg.setAttribute('width', w);
+    svg.setAttribute('height', h);
+    [].forEach.call(svg.querySelectorAll('path'), function (p) { p.setAttribute('d', dd); });
+  }
+
+  var waves = [].slice.call(document.querySelectorAll('.shot.wave'));
+  waves.forEach(function (shot) {
+    var img = shot.querySelector('img');
+    draw(shot);
+    if (img && !img.complete) img.addEventListener('load', function () { draw(shot); });
+  });
+
+  if (window.ResizeObserver) {
+    var ro = new ResizeObserver(function (es) { es.forEach(function (e) { draw(e.target); }); });
+    waves.forEach(function (s) { ro.observe(s); });
+  } else {
+    var t;
+    window.addEventListener('resize', function () {
+      clearTimeout(t); t = setTimeout(function () { waves.forEach(draw); }, 120);
+    });
+  }
+
+  /*  A horizontal scroller is invisible to a wheel that only sends deltaY, which
+      is most of them. Translating vertical wheel to horizontal makes the rail work
+      with an ordinary mouse; the guard hands the gesture back to the page once the
+      rail is against either end, so the page never feels stuck. */
+  var rail = document.querySelector('.rail');
+  if (rail) {
+    rail.addEventListener('wheel', function (ev) {
+      if (ev.deltaY === 0 || Math.abs(ev.deltaX) > Math.abs(ev.deltaY)) return;
+      var atStart = rail.scrollLeft <= 0 && ev.deltaY < 0;
+      var atEnd = rail.scrollLeft >= rail.scrollWidth - rail.clientWidth - 1 && ev.deltaY > 0;
+      if (atStart || atEnd) return;
+      ev.preventDefault();
+      rail.scrollLeft += ev.deltaY;
+    }, { passive: false });
+  }
+})();
+</script>
 
 <script>
 /*  THE SINE EDGE ON THE CARDS, the same construction the wall's frames are cut from.
