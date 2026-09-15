@@ -66,6 +66,11 @@ from PIL import Image
 #  AND THE HAT IS NOT EVIDENCE. Roatan's caption once leaned partly on the ROATAN
 #  hat; that hat is on his head at COZUMEL in p-9169. A souvenir travels, so it
 #  locates nothing. Coordinates carry that caption now.
+#  PRECISION HAS A LIMIT TOO. The four Dominican frames sit between Taino Bay and
+#  Amber Cove, the two Puerto Plata cruise ports, about 500 m from one and 1.3 km
+#  from the other. That is not enough to pick one, so the caption names the city
+#  and stops. A coordinate is not automatically a fine-grained answer.
+#
 #
 #  BRACKETING HAS A LIMIT, and p-8533 is past it: no GPS, and its nearest
 #  geotagged neighbour is 8.7 HOURS earlier on a day running Austin, Houston,
@@ -155,6 +160,30 @@ PHOTOS = [
      "Ernie in a hotel in Lake Charles, Louisiana, a barber shop and a tiled column behind him."),
     ("p-8533.jpg", "wave",  "Ernie",
      "Ernie in a black cowboy hat with a patterned band, city lights through the window behind him."),
+    ("p-8548.jpg", "clips", "Jasper",
+     "Jasper stretched to full height up the window glass, watching a squirrel in a window feeder."),
+    ("p-8291.jpg", "wave",  "a squirrel",
+     "A squirrel sprawled flat on the patio in the heat, all four legs stretched straight out."),
+    ("p-8233.jpg", "clips", "Line of Fire",
+     "T.J. Wade on keys and Anne on drums, Line of Fire playing an outdoor stage in Austin at night."),
+    ("p-8571.jpg", "wave",  "leaving Miami",
+     "The Miami shoreline astern as the ship leaves port."),
+    ("p-8581.jpg", "clips", "at sea",
+     "Sunset over the ship's wake in open water."),
+    ("p-8584.jpg", "wave",  "Puerto Plata",
+     "The bow of the Norwegian Aqua alongside at Puerto Plata, Dominican Republic."),
+    ("p-8589.jpg", "clips", "Puerto Plata",
+     "The painted hull of the Norwegian Aqua at Puerto Plata, a crane and a freighter beyond."),
+    ("p-8591.jpg", "wave",  "Puerto Plata",
+     "The Norwegian Aqua in full profile at Puerto Plata, seen across the rocks."),
+    ("p-8593.jpg", "clips", "Puerto Plata",
+     "The Norwegian Aqua seen over a hedge from the beach at Puerto Plata."),
+    ("p-8601.jpg", "wave",  "St Thomas",
+     "Charlotte Amalie from the hillside, the Norwegian Aqua and a Costa ship at the piers."),
+    ("p-8627.jpg", "clips", "Tortola",
+     "Leaving Road Town, Tortola under a heavy sky, the pier falling astern."),
+    ("p-8353.jpg", "wave",  "Ernie",
+     "Ernie on deck at Galveston, the ship's glass canopy behind him."),
     # Not a beast. Published only with the door number and the plate blurred out.
     ('p-4532.jpg', 'wave',  'home',
      "Ernie's house, seen from the street on a clear day, with a blue SUV parked in the driveway."),

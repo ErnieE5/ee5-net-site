@@ -93,6 +93,19 @@ SOURCES = [
     # faces without touching the neon, which is already at the top of the range.
     ('202510_a', 'IMG_8497.HEIC', 'p-8497', [], 1.12),
     ('202510_a', 'IMG_8533.HEIC', 'p-8533', [], None, NOSE),
+    ('202510_a', 'IMG_8548.HEIC', 'p-8548', [], None),
+    ('202510_a', 'IMG_8571.HEIC', 'p-8571', [], None),
+    ('202510_a', 'IMG_8581.HEIC', 'p-8581', [], None),
+    ('202510_a', 'IMG_8584.HEIC', 'p-8584', [], None),
+    ('202510_a', 'IMG_8589.HEIC', 'p-8589', [], None),
+    ('202510_a', 'IMG_8591.HEIC', 'p-8591', [], None),
+    ('202510_a', 'IMG_8593.HEIC', 'p-8593', [], None),
+    ('202510_a', 'IMG_8601.HEIC', 'p-8601', [], None),
+    ('202510_a', 'IMG_8627.HEIC', 'p-8627', [], None),
+    ('202509_a', 'IMG_8353.HEIC', 'p-8353', [], None),
+    # Night stage, so a small lift opens the players without touching the lamps.
+    ('202508_a', 'IMG_8233.HEIC', 'p-8233', [], 1.15),
+    ('202508_a', 'IMG_8291.HEIC', 'p-8291', [], None),
 ]
 
 
