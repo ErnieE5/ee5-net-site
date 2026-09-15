@@ -1,16 +1,469 @@
 <!doctype html>
+<html lang="en">
+<head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>ee5.net</title>
+<meta name="description" content="Ernie Ewert — fast, keyboard-driven image viewers and the libraries under them.">
+<meta name="theme-color" content="#17161a">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%2317161a'/%3E%3Ctext x='16' y='22' font-family='ui-monospace,monospace' font-size='15' font-weight='700' fill='%2378C8FF' text-anchor='middle'%3Ee5%3C/text%3E%3C/svg%3E">
+
 <style>
-  :root { color-scheme: light dark; }
-  body { margin:0; min-height:100vh; display:grid; place-items:center;
-         font:16px/1.5 system-ui,-apple-system,Segoe UI,sans-serif; }
-  main { text-align:center; padding:2rem; }
-  h1 { font-size:2rem; margin:0 0 .5rem; letter-spacing:-.02em; }
-  p { margin:0; opacity:.65; }
+  /*  THE PALETTE AND THE BOX VOCABULARY ARE EASEL'S, HAND-CARRIED.  Source:
+      config-web/{styles,layout}.html on `eek` (/home/ernie/Applications/easel), whose own
+      comments trace the state colours back to `states_palette` in easel's switch.json.
+      Copied rather than linked: this site is one file with no build step, so if easel's
+      palette moves this does not follow it.  That is the trade. */
+  :root {
+    color-scheme: dark;
+    --bg:     #17161a;
+    --fg:     #ecebe8;
+    --muted:  #9a948d;
+    --rule:   #302d33;
+    --panel:  #1c1b20;
+    --glass:  #232228;
+    --warn:   #d9a441;
+    /*  Cyan is the "current" voice fleet-wide -- easel paints the tile that just changed
+        with it, and every primary action.  Here it marks a live edge and nothing else. */
+    --cur:    #78C8FF;
+    --mono:   ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  /*  Easel's reason, unchanged: without this, the scrollbar's arrival narrows the column
+      and the whole page shifts by its width. */
+  html { scrollbar-gutter: stable; }
+  html, body { height: 100%; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--fg);
+    font: 15px/1.55 ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    background-image:
+      radial-gradient(70rem 40rem at 12% -10%, #1d1c22 0%, rgba(29,28,34,0) 60%),
+      radial-gradient(50rem 30rem at 95% 108%, #1b1a20 0%, rgba(27,26,32,0) 62%);
+    background-attachment: fixed;
+    display: flex;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 1 auto;
+    width: 100%;
+    max-width: 50rem;
+    margin: 0 auto;
+    padding: clamp(2rem, 7vh, 4rem) 1.5rem 3rem;
+  }
+
+  /* ----------------------------------------------------------- the canvas -- */
+
+  /*  THE HERO IS A LAYOUT, DRAWN IN THE EDITOR'S OWN VOCABULARY -- the same regions,
+      guides, hatch and handles layout.html draws.  The one region that is selected holds
+      the mark, and the mark hangs in a sine-edged frame: easel's own proof case that
+      geometry beats a nine-slice, since no band of that silhouette ever repeats. */
+  .canvas {
+    display: block;
+    width: 100%;
+    height: auto;
+    border: 1px solid var(--rule);
+    border-radius: 5px;
+    background: #101014;
+  }
+
+  /*  Easel's `.rid`: monospace, semibold, tight, shadowed hard enough to stay legible
+      over whatever the region happens to be showing. */
+  .rid  { font: 600 15px/1 var(--mono); fill: #fff; }
+  /*  Easel's `.dim`: same family, smaller, dimmer, bottom-right. */
+  .dim  { font: 13px/1 var(--mono); fill: rgba(255,255,255,.75); }
+  /*  Easel's `.guide`: "A GUIDE IS NOT GEOMETRY." Dashed, unfilled, never selectable. */
+  .glbl { font: 600 13px/1 var(--mono); fill: var(--muted); }
+
+  .cap {
+    margin: .55rem 0 0;
+    font: .74rem/1.4 var(--mono);
+    color: var(--muted);
+  }
+  .cap b { color: var(--cur); font-weight: 600; }
+
+  /* --------------------------------------------------------------- masthead -- */
+
+  h1 {
+    margin: 2.2rem 0 0;
+    font-size: clamp(2.1rem, 7vw, 2.9rem);
+    font-weight: 600;
+    letter-spacing: -.025em;
+    line-height: 1.05;
+  }
+  h1 .dot { color: var(--muted); font-weight: 400; }
+
+  .lede { margin: .8rem 0 0; max-width: 36rem; color: var(--muted); font-size: 1.02rem; }
+
+  /* -------------------------------------------------------------- sections -- */
+
+  /*  Easel's section label, unchanged: small, uppercase, widely tracked, muted. */
+  h2 {
+    font-size: .82rem;
+    text-transform: uppercase;
+    letter-spacing: .07em;
+    color: var(--muted);
+    font-weight: 600;
+    margin: 2.8rem 0 1rem;
+  }
+
+  ul.rgns { list-style: none; margin: 0; padding: 0; display: grid; gap: .7rem; }
+
+  /*  EACH CARD IS A REGION, AND ITS EDGE IS A SINE.  The straight border here is the
+      no-JS floor; when the script runs it adds `.waved`, which hands the whole silhouette
+      -- fill and stroke both -- to an SVG path, so the box is genuinely non-rectangular
+      rather than a wavy line drawn over a rectangle.
+      PADDING IS DERIVED, NOT PICKED.  The edge's centreline sits at AMP+STROKE (12.5) and
+      the trough swings a further AMP inward, so the wave reaches 23.5px into the box; the
+      text has to start past that or the swell runs through the first line. */
+  a.rgn {
+    position: relative;
+    display: block;
+    padding: 1.9rem 2.1rem 1.75rem;
+    border: 1.5px solid var(--rule);
+    border-radius: 3px;
+    background: var(--panel);
+    color: var(--fg);
+    text-decoration: none;
+    transition: color .14s ease;
+  }
+  a.rgn:hover, a.rgn:focus-visible { background: rgba(120, 200, 255, .10); }
+
+  a.rgn.waved { border-color: transparent; background: none; border-radius: 0; }
+  a.rgn.waved:hover, a.rgn.waved:focus-visible { background: none; }
+
+  /*  The drawn edge sits under the text and takes no clicks. */
+  .edge { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+  .edge path {
+    fill: var(--panel);
+    stroke: var(--rule);
+    stroke-width: 1.5;
+    /*  Easel's mechanism: the geometry scales, the border does not.  Constant angle,
+        constant border, one path -- the thing no raster nine-slice can do. */
+    vector-effect: non-scaling-stroke;
+    transition: stroke .14s ease, fill .14s ease;
+  }
+  a.rgn:hover .edge path, a.rgn:focus-visible .edge path {
+    stroke: var(--cur);
+    fill: #1e2530;
+  }
+
+  /*  The id rides ON the top edge, the way a selected region's label does.  It needs the
+      page ground behind it so the wave does not run through the letters. */
+  a.rgn .rid-h {
+    position: absolute;
+    top: -.62em;
+    left: 2.1rem;
+    padding: 0 .35rem;
+    background: var(--bg);
+    font: 600 .72rem/1 var(--mono);
+    color: var(--muted);
+    transition: color .14s ease;
+  }
+  a.rgn:hover .rid-h, a.rgn:focus-visible .rid-h { color: var(--cur); }
+
+  /*  The readout, bottom-right, like `.dim`.  Tabular figures so a column of them holds
+      still instead of dancing as the digits change. */
+  a.rgn .dim-h {
+    position: absolute;
+    right: 2.1rem;
+    bottom: .85rem;
+    font: .68rem/1 var(--mono);
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /*  The edge is absolutely positioned, and a positioned box paints over static content
+      however early it sits in the DOM -- so the body text has to be lifted onto its own
+      layer or the wave simply covers it.  `.rid-h` and `.dim-h` are already positioned and
+      come later, so they were never affected; these two were. */
+  a.rgn .nm  { position: relative; z-index: 1; font-weight: 600; font-size: 1.02rem; }
+  a.rgn .sub { position: relative; z-index: 1;
+               display: block; margin-top: .25rem; padding-right: 8rem;
+               font-size: .88rem; color: var(--muted); }
+
+  /*  EASEL'S `.rgn.nc` -- hatched, "so a region that is not a picture cannot read as an
+      empty slot."  Under `.waved` the hatch becomes the path's fill, so it is clipped to
+      the wave instead of squaring off the corners. */
+  a.rgn.nc {
+    background:
+      repeating-linear-gradient(45deg, transparent 0 5px, rgba(120,200,255,.16) 5px 7px),
+      var(--panel);
+    border-style: dashed;
+  }
+  a.rgn.nc.waved { background: none; }
+  a.rgn.nc .edge path { fill: url(#hatch); stroke-dasharray: 6 4; }
+  a.rgn.nc:hover .edge path, a.rgn.nc:focus-visible .edge path { fill: url(#hatch); }
+
+  /* ---------------------------------------------------------------- footer -- */
+
+  /*  Easel's `footer.build`: a thin muted strip, top-ruled, stating provenance and then
+      getting out of the way. */
+  footer {
+    flex: 0 0 auto;
+    border-top: 1px solid var(--rule);
+    background: var(--panel);
+    color: var(--muted);
+    font-size: .78rem;
+  }
+  footer .inner {
+    max-width: 50rem;
+    margin: 0 auto;
+    padding: .6rem 1.5rem;
+    display: flex; gap: .75rem; align-items: center; flex-wrap: wrap;
+  }
+  footer a { color: var(--muted); text-decoration: none; border-bottom: 1px solid transparent; }
+  footer a:hover { color: var(--fg); border-bottom-color: var(--rule); }
+  footer .spacer { flex: 1 1 auto; }
+  footer code { font-family: var(--mono); font-size: .92em; }
+
+  a:focus-visible { outline: 2px solid var(--cur); outline-offset: 3px; }
+
+  /*  Under ~34rem the readout would collide with the description, so it leaves the corner
+      and the description gets its width back. */
+  @media (max-width: 34rem) {
+    a.rgn .sub   { padding-right: 0; }
+    a.rgn .dim-h { position: static; display: block; margin-top: .5rem; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    a.rgn, a.rgn .rid-h, .edge path { transition: none; }
+  }
 </style>
+</head>
+<body>
+
+<!--  One hatch tile for the whole page: 45 degrees, 5 on 2, which is easel's
+      repeating-linear-gradient expressed as a pattern so a path can be filled with it. -->
+<svg width="0" height="0" aria-hidden="true" focusable="false" style="position:absolute">
+  <defs>
+    <pattern id="hatch" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="7" height="7" fill="#1c1b20"/>
+      <rect width="2" height="7" fill="#78C8FF" fill-opacity=".16"/>
+    </pattern>
+  </defs>
+</svg>
+
 <main>
-  <h1>ee5.net</h1>
-  <p>&nbsp;</p>
+
+  <svg class="canvas" viewBox="0 0 960 540" role="img"
+       aria-label="A layout diagram in the style of the easel layout editor: four labelled regions inside a dashed edge guide. The selected region holds the signature 'Ernie' in a frame with sine-wave edges.">
+
+    <!--  THE EDGE MARGIN GUIDE. Dashed, unfilled, inert: a zone, not a region. -->
+    <rect x="28" y="28" width="904" height="484" fill="none"
+          stroke="#9a948d" stroke-opacity=".45" stroke-width="1.5" stroke-dasharray="6 5" rx="2"/>
+    <text class="glbl" x="36" y="46">edge</text>
+
+    <!--  CONTENT REGIONS: solid edge, cyan wash. -->
+    <g>
+      <rect x="56" y="56" width="400" height="190" fill="#78C8FF" fill-opacity=".10"
+            stroke="#78C8FF" stroke-width="1.5"/>
+      <text class="rid" x="64" y="76">masthead</text>
+      <text class="dim" x="448" y="238" text-anchor="end">400×190</text>
+    </g>
+
+    <g>
+      <rect x="56" y="274" width="400" height="210" fill="#78C8FF" fill-opacity=".10"
+            stroke="#78C8FF" stroke-width="1.5"/>
+      <text class="rid" x="64" y="294">work</text>
+      <text class="dim" x="448" y="476" text-anchor="end">400×210</text>
+    </g>
+
+    <!--  THE SELECTED REGION, with the eight handles -- and inside it the sine frame:
+          period 22, amplitude 3, one quadratic arch per half period, the period snapped
+          per edge so every corner lands on a zero crossing. -->
+    <g>
+      <rect x="488" y="56" width="416" height="252" fill="#78C8FF" fill-opacity=".06"/>
+
+      <path d="M508.0 80.0 Q555.0 66.0 602.0 80.0 Q649.0 94.0 696.0 80.0 Q743.0 66.0 790.0 80.0 Q837.0 94.0 884.0 80.0 Q898.0 131.0 884.0 182.0 Q870.0 233.0 884.0 284.0 Q837.0 298.0 790.0 284.0 Q743.0 270.0 696.0 284.0 Q649.0 298.0 602.0 284.0 Q555.0 270.0 508.0 284.0 Q494.0 233.0 508.0 182.0 Q522.0 131.0 508.0 80.0 Z" fill="#101014" stroke="#78C8FF" stroke-width="1.5"
+            stroke-opacity=".85" vector-effect="non-scaling-stroke"/>
+      <image href="ernie.png" x="622" y="140" width="148" height="73"
+             preserveAspectRatio="xMidYMid meet"/>
+
+      <rect x="488" y="56" width="416" height="252" fill="none" stroke="#fff" stroke-width="1.5"/>
+      <text class="rid" x="496" y="76">mark</text>
+      <text class="dim" x="896" y="300" text-anchor="end">416×252</text>
+      <!--  Eight handles: white, hairline-black, drawn only on the selected region "so a
+            busy layout is not a field of dots." -->
+      <g fill="#fff" stroke="#000" stroke-width="1" shape-rendering="crispEdges">
+        <rect x="481" y="49"  width="14" height="14" rx="2"/>
+        <rect x="689" y="49"  width="14" height="14" rx="2"/>
+        <rect x="897" y="49"  width="14" height="14" rx="2"/>
+        <rect x="481" y="175" width="14" height="14" rx="2"/>
+        <rect x="897" y="175" width="14" height="14" rx="2"/>
+        <rect x="481" y="301" width="14" height="14" rx="2"/>
+        <rect x="689" y="301" width="14" height="14" rx="2"/>
+        <rect x="897" y="301" width="14" height="14" rx="2"/>
+      </g>
+    </g>
+
+    <!--  A FILL. Dashed and hatched: not a picture, and not an empty slot either. -->
+    <g>
+      <rect x="488" y="336" width="416" height="148" fill="url(#hatch)"
+            stroke="#78C8FF" stroke-width="1.5" stroke-dasharray="6 4"/>
+      <text class="rid" x="496" y="356">fill</text>
+      <text class="dim" x="896" y="476" text-anchor="end">416×148</text>
+    </g>
+  </svg>
+
+  <p class="cap">layout · 960×540 · 4 regions · 1 <b>selected</b> · frame: sine, period 170, amp 7</p>
+
+  <h1>ee5<span class="dot">.</span>net</h1>
+
+  <p class="lede">
+    Ernie Ewert. Mostly fast, keyboard-driven image viewers — and the libraries
+    that end up underneath them.
+  </p>
+
+  <h2>Work</h2>
+  <ul class="rgns">
+    <li>
+      <a class="rgn" href="https://github.com/ErnieE5/quick-viewer">
+        <span class="rid-h">r1</span>
+        <span class="nm">quick-viewer</span>
+        <span class="sub">A fast full-screen directory image viewer. The current one.</span>
+        <span class="dim-h">Rust · iced</span>
+      </a>
+    </li>
+    <li>
+      <a class="rgn" href="https://github.com/ErnieE5/ee-conio">
+        <span class="rid-h">r2</span>
+        <span class="nm">ee-conio</span>
+        <span class="sub">ANSI escape-sequence encoding for terminals. The foundation the rest builds on.</span>
+        <span class="dim-h">Rust · crates.io</span>
+      </a>
+    </li>
+    <li>
+      <a class="rgn" href="https://github.com/ErnieE5/ee5_util">
+        <span class="rid-h">r3</span>
+        <span class="nm">ee5_util</span>
+        <span class="sub">Utility library.</span>
+        <span class="dim-h">C++</span>
+      </a>
+    </li>
+    <li>
+      <a class="rgn" href="https://github.com/ErnieE5/ee5_base64">
+        <span class="rid-h">r4</span>
+        <span class="nm">ee5_base64</span>
+        <span class="sub">base64 encoding.</span>
+        <span class="dim-h">Lua</span>
+      </a>
+    </li>
+    <li>
+      <!--  The hatched one: everything else here is a repository; this is a person. -->
+      <a class="rgn nc" href="https://github.com/ErnieE5">
+        <span class="rid-h">fill</span>
+        <span class="nm">github.com/ErnieE5</span>
+        <span class="sub">Everything else, including the forks kept for reading.</span>
+        <span class="dim-h">profile</span>
+      </a>
+    </li>
+  </ul>
+
 </main>
+
+<footer>
+  <div class="inner">
+    <span><a href="https://github.com/ErnieE5">github.com/ErnieE5</a></span>
+    <span class="spacer"></span>
+    <span><code>ee5.net</code></span>
+  </div>
+</footer>
+
+<script>
+/*  THE SINE EDGE, the same construction the hero's frame is cut from.
+
+    Period and amplitude are constants in CSS pixels and stay constants at every card
+    size -- easel's whole point in `docs/nine-slice-or-geometry.md`: "the silhouette moves
+    continuously down the entire run, so no band anywhere repeats", which is why this is
+    geometry and not a nine-slice.  The path is redrawn on resize rather than scaled, so
+    the wave never stretches.
+
+    One quadratic arch per half period.  A quadratic peaks at HALF its control offset, so
+    the control sits at 2*AMP to land a crest of AMP.  The period is snapped per edge to a
+    whole number of cycles so every corner lands on a zero crossing and the four edges meet
+    without a step. */
+(function () {
+  'use strict';
+  /*  A LONG SWELL, NOT A RIPPLE.  Easel's tick used period 22 / amp 3 because a tick is a
+      chip a couple of centimetres wide; at this page's card width that same period lands
+      ~28 cycles across an edge and reads as a torn edge rather than a wave.  The mechanism
+      is unchanged -- constant period, constant stroke, redrawn not stretched -- only the
+      constants are sized to the box they are drawn on. */
+  var PERIOD = 200, AMP = 11, STROKE = 1.5;
+  var SVGNS = 'http://www.w3.org/2000/svg';
+
+  function sineRect(w, h) {
+    var inset = AMP + STROKE, d = [], started = false;
+    var bw = w - 2 * inset, bh = h - 2 * inset;
+    // The limit is AMPLITUDE, not period: `edge` already snaps a short run to a single
+    // cycle, so an edge shorter than PERIOD is fine -- it just swells once.  What actually
+    // breaks is a box too shallow to hold the trough, where opposite edges would cross.
+    // Requiring four amplitudes of clearance keeps the silhouette a box.
+    //   (Guarding on PERIOD instead silently un-waved every card the moment PERIOD went
+    //    past the card height, which is exactly what it did at 170.)
+    if (bw < 4 * AMP || bh < 4 * AMP) return '';
+
+    function edge(len, fn) {
+      var n = Math.max(1, Math.round(len / PERIOD)), half = len / (2 * n), k, s, c, e;
+      if (!started) { var p = fn(0, 0); d.push('M' + p[0].toFixed(1) + ' ' + p[1].toFixed(1)); started = true; }
+      for (k = 0; k < 2 * n; k++) {
+        s = (k % 2 === 0) ? 2 * AMP : -2 * AMP;
+        c = fn((k + 0.5) * half, s);
+        e = fn((k + 1) * half, 0);
+        d.push('Q' + c[0].toFixed(1) + ' ' + c[1].toFixed(1) + ' ' + e[0].toFixed(1) + ' ' + e[1].toFixed(1));
+      }
+    }
+    edge(bw, function (t, o) { return [inset + t, inset - o]; });          // top
+    edge(bh, function (t, o) { return [inset + bw + o, inset + t]; });     // right
+    edge(bw, function (t, o) { return [inset + bw - t, inset + bh + o]; });// bottom
+    edge(bh, function (t, o) { return [inset - o, inset + bh - t]; });     // left
+    return d.join(' ') + ' Z';
+  }
+
+  var cards = [].slice.call(document.querySelectorAll('a.rgn'));
+
+  function draw(card) {
+    var w = card.offsetWidth, h = card.offsetHeight;
+    var svg = card.querySelector('svg.edge'), path;
+    var dd = sineRect(w, h);
+    if (!dd) { card.classList.remove('waved'); if (svg) svg.remove(); return; }
+    if (!svg) {
+      svg = document.createElementNS(SVGNS, 'svg');
+      svg.setAttribute('class', 'edge');
+      svg.setAttribute('aria-hidden', 'true');
+      svg.setAttribute('focusable', 'false');
+      path = document.createElementNS(SVGNS, 'path');
+      svg.appendChild(path);
+      card.insertBefore(svg, card.firstChild);
+    } else {
+      path = svg.querySelector('path');
+    }
+    svg.setAttribute('viewBox', '0 0 ' + w + ' ' + h);
+    path.setAttribute('d', dd);
+    card.classList.add('waved');
+  }
+
+  cards.forEach(draw);
+
+  if (window.ResizeObserver) {
+    var ro = new ResizeObserver(function (entries) {
+      entries.forEach(function (en) { draw(en.target); });
+    });
+    cards.forEach(function (c) { ro.observe(c); });
+  } else {
+    var t;
+    window.addEventListener('resize', function () {
+      clearTimeout(t);
+      t = setTimeout(function () { cards.forEach(draw); }, 100);
+    });
+  }
+})();
+</script>
+
+</body>
+</html>
