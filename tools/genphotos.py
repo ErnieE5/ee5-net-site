@@ -159,6 +159,16 @@ SOURCES = [
     ('202403_a', 'IMG_5363.HEIC', 'p-5363', [], None),
     ('202403_a', 'IMG_5397.HEIC', 'p-5397', [], None),
     ('202403_a', 'IMG_5440.HEIC', 'p-5440', [], None),
+    # January 2024: the first fortnight. Several are dim, and the lift is worth
+    # more here than usual because two frightened cats in shadow read as nothing.
+    ('202401_a', 'IMG_5074.HEIC', 'p-5074', [], 1.14),
+    ('202401_a', 'IMG_5127.HEIC', 'p-5127', [], 1.10),
+    ('202401_a', 'IMG_5129.HEIC', 'p-5129', [], 1.28),
+    ('202401_a', 'IMG_5162.HEIC', 'p-5162', [], None),
+    ('202402_a', 'IMG_5200.HEIC', 'p-5200', [], None),
+    ('202402_a', 'IMG_5244.HEIC', 'p-5244', [], None),
+    ('202402_a', 'IMG_5258.HEIC', 'p-5258', [], None),
+    ('202402_a', 'IMG_5266.HEIC', 'p-5266', [], None),
 ]
 
 

@@ -15,6 +15,13 @@ from PIL import Image
 #  THE CATS. Garnet has the white bib and white paws; Jasper has neither. Every
 #  attribution here was made from the markings in the frame, not from the order
 #  the files arrived. Both are male ("the boys"), so pronouns are available.
+#  THE FIRST FORTNIGHT IS ON THE RAIL: p-5074 is their first day home, 15 January
+#  2024, both of them wedged behind a cushion. That fixes the adoption to mid
+#  January, which matches what he said about early 2024, and it means the whole
+#  collection runs from their first day to the present.
+#
+#  The blue mural is already painted in February 2024 (p-5200) and the cat tree is
+#  still in pieces on the floor in March (p-5397), so the mural came first.
 #
 #  ALT TEXT DESCRIBES WHAT IS IN THE FRAME, and only that. A description that
 #  states more than the picture shows is wrong in the one place nobody sighted
@@ -291,6 +298,22 @@ PHOTOS = [
      "Garnet and Jasper sitting side by side, both watching the red dot on the wall above them."),
     ("p-5440.jpg", "clips", "Garnet",
      "Garnet loafing under a chrome-framed coffee table in a patch of sun."),
+    ("p-5074.jpg", "clips", "first day home",
+     "First day home: Jasper and Garnet tucked into the gap behind a cushion, not sure yet what to make of the place."),
+    ("p-5127.jpg", "wave",  "Garnet",
+     "Garnet crouched low in the hallway with his ears back, a week after arriving."),
+    ("p-5129.jpg", "clips", "Garnet & Jasper",
+     "Garnet and Jasper curled up together in a fluffy bed in the dark."),
+    ("p-5162.jpg", "wave",  "two weeks home",
+     "Two weeks at home: Garnet nose down to the floor beside a new scratching post."),
+    ("p-5200.jpg", "clips", "Garnet",
+     "Garnet up on the media console with a paw on the television, colour bars on the screen."),
+    ("p-5244.jpg", "wave",  "Garnet",
+     "Garnet licking a squeeze treat straight from the tube in Ernie's hand."),
+    ("p-5258.jpg", "clips", "Garnet",
+     "Garnet standing over a run of desk cables with his tail up, two screens behind him."),
+    ("p-5266.jpg", "wave",  "Garnet & Jasper",
+     "Garnet and Jasper pressed cheek to cheek inside a fabric cat cave, a toy mouse dangling in front of them."),
     # Not a beast. Published only with the door number and the plate blurred out.
     ('p-4532.jpg', 'wave',  'home',
      "Ernie's house, seen from the street on a clear day, with a blue SUV parked in the driveway."),
