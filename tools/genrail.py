@@ -199,6 +199,10 @@ PHOTOS = [
      "Jasper stretched up the window with Garnet sitting beside him, both watching the feeder."),
     ("p-8142.jpg", "clips", "a squirrel",
      "A squirrel clinging to the wall to raid a lantern-shaped bird feeder over the fence."),
+    ("p-8060.jpg", "wave",  "Ouiness",
+     "The band Ouiness playing under a carport, seven of them, with stuffed animals watching from child-sized chairs."),
+    ("p-8074.jpg", "clips", "Line of Fire",
+     "Anne on drums and T.J. Wade on keys, Line of Fire playing outdoors in the evening."),
     # Not a beast. Published only with the door number and the plate blurred out.
     ('p-4532.jpg', 'wave',  'home',
      "Ernie's house, seen from the street on a clear day, with a blue SUV parked in the driveway."),
