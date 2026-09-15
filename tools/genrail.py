@@ -36,6 +36,11 @@ from PIL import Image
 #    - the pale shelving is an old, durable IKEA set; even he is not sure of the
 #      wood, which is the whole argument for saying 'pale wood' and stopping there
 #    - the house in p-4532 is his own
+#    - the places are named from recognition, with his leave to name them and be
+#      corrected. San Diego is settled by the USS Midway at the pier and the twin
+#      Hyatt towers; Cabo by the arch itself; Ensenada is READ, its sign is in the
+#      frame. St Thomas and Roatan are the softer two. The port in p-0008 is not
+#      named, because nothing in that frame says which one it is.
 #
 #  MATERIAL IS NOT VISIBLE, only finish is. 'a wood floor' was vinyl and 'a maple
 #  shelving unit' was a guess at a species from a colour. A photograph shows how a
@@ -72,10 +77,10 @@ PHOTOS = [
      "Jasper asleep on Ernie's chest, the pair of them horizontal beside a bright window."),
     ('p-0191.jpg', 'wave',  'Jasper',
      "Jasper curled asleep in one of the cat tree's fleece cradles, one paw hooked over the edge."),
-    ('p-3038.jpg', 'clips', 'Norwegian Viva',
-     'The cruise ship Norwegian Viva at her berth, seen from the hillside above the harbour.'),
-    ('p-0008.jpg', 'wave',  'Norwegian Viva',
-     'The bow of the Norwegian Viva at the pier, another ship moored alongside.'),
+    ('p-3038.jpg', 'clips', 'St Thomas',
+     'The Norwegian Viva at her berth in Charlotte Amalie, St Thomas, seen from the hillside above the harbour.'),
+    ('p-0008.jpg', 'wave', 'Norwegian Viva',
+     'The bow of the Norwegian Viva at the pier, the Celebrity Silhouette moored alongside.'),
     ('p-0053.jpg', 'clips', 'Garnet',
      'Garnet sprawled on the blue shag rug, cheek resting in a cupped hand.'),
     ('p-0123.jpg', 'wave',  'Garnet & Jasper',
@@ -98,10 +103,10 @@ PHOTOS = [
      "Jasper standing over Garnet, who is sprawled on a striped runner along the media console."),
     ("p-9334.jpg", "wave",  "Ensenada",
      "The cruise ship Norwegian Jade behind the big ENSENADA letters, palms in front."),
-    ("p-9383.jpg", "clips", "the arch",
-     "Two sea stacks and a natural rock arch at sunset, a small boat passing between them."),
-    ("p-9326.jpg", "wave",  "leaving port",
-     "A city skyline receding behind the ship's wake under a grey sky."),
+    ('p-9383.jpg', 'clips', 'Cabo San Lucas',
+     "El Arco and the sea stacks at Land's End, Cabo San Lucas, a small boat passing at sunset."),
+    ('p-9326.jpg', 'wave', 'leaving San Diego',
+     "The San Diego skyline receding behind the ship's wake, the USS Midway at the pier."),
     ("p-9583.jpg", "clips", "Ernie",
      "Ernie in a straw hat stamped ROATAN, sitting by a curved window."),
     ("p-9246.jpg", "clips", "the cat tree",
@@ -118,10 +123,10 @@ PHOTOS = [
      "A towel animal perched on the arm of a sofa, holding the TV remote."),
     ("p-9016.jpg", "clips", "rubber duck",
      "A giant rubber duck riding in the bridge wing of a cruise ship."),
-    ("p-5768.jpg", "wave",  "the harbour",
-     "Four cruise ships in a harbour, seen from a fort wall with people looking out over the town."),
-    ("p-8986.jpg", "clips", "Ernie",
-     "Ernie in the ROATAN hat on a balcony, colourful rooftops below."),
+    ('p-5768.jpg', 'wave', 'San Juan',
+     'Four cruise ships in San Juan harbour, seen from the fort wall above Old San Juan.'),
+    ('p-8986.jpg', 'clips', 'Ernie',
+     'Ernie in the ROATAN hat on a balcony above the painted rooftops of Roatán.'),
     ("p-9169.jpg", "wave",  "Ernie",
      "Ernie in the ROATAN hat and sunglasses, out on deck."),
     ("p-8701.jpg", "clips", "Ernie",
