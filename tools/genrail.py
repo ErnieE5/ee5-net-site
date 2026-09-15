@@ -52,10 +52,11 @@ from PIL import Image
 #  the 103 originals have a paired .MOV. The motion was always there; I was
 #  reading half of each original and calling the other half impossible.
 #
-#  To look: ffmpeg -i <original>.MOV -vf fps=4,scale=480:-2 out_%02d.jpg
-#  There is no ffmpeg on PATH here; one is bundled with an unrelated application
-#  at C:\Program Files (x86)\CoolerMaster\MasterPlusfmpeg.exe, which works but
-#  is not something to depend on.
+#  To look: python3 tools/liveframes.py <stem>   (contact sheet from the pair)
+#  It drives mpv, which is what he uses. mpv is not on PATH here; the portable
+#  builds live under the profile and liveframes.py knows where. Note that
+#  --vo-image-format does not exist in mpv 0.41 and passing it silently writes
+#  nothing, which is how mpv first looked incapable of the job.
 #
 #  The move is always the same: the photograph shows a SURFACE or a FITTING, and
 #  the place or substance it belongs to is a separate claim. Describe the finish

@@ -50,6 +50,30 @@ The comment above `PHOTOS` carries the caption rules and the facts Ernie has sup
 about what is actually in the pictures. Read it before writing a caption; it exists
 because those facts were twice lost and twice re-derived.
 
+## liveframes.py
+
+Most of these originals are **Live Photos**: a `.MOV` sits beside the `.HEIC`
+with a couple of seconds of video in it. 94 of 103 have one.
+
+```bash
+python3 tools/liveframes.py --list      # which originals have a pair
+python3 tools/liveframes.py p-6444      # contact sheet of the motion
+```
+
+This exists because `p-6444` was captioned "asleep on a sandal" and is neither:
+it is a running shoe and the cat is rolling on it. I argued the motion was
+unknowable from a photograph before Ernie pointed out that the photograph is not
+all there is. **Before captioning an action, look at the pair.**
+
+It drives `mpv`, which is not on PATH here — the portable builds are under the
+profile and the script knows where. `--vo-image-format` does not exist in mpv
+0.41 and passing it writes nothing at all, so the script does not pass it and
+does not pass `--really-quiet` either: a silenced failure looks exactly like
+"produced no frames".
+
+Frames land in `.liveframes/`, which is gitignored and must stay that way —
+`.nojekyll` means anything committed here is published.
+
 ## rail.css
 
 Spliced into `index.html` by `genrail.py`. Edit it here, never in `index.html` — the

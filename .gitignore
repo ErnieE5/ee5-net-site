@@ -3,3 +3,7 @@
 # caches included.
 __pycache__/
 *.pyc
+
+# Scratch frames pulled out of Live Photo pairs by tools/liveframes.py.
+# Machine-written, and this repo publishes whatever it contains.
+.liveframes/
