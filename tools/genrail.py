@@ -28,6 +28,13 @@ from PIL import Image
 #    - the white cabinets are the kitchen's, on two walls
 #    - Garnet and Jasper are both male ('the boys'), so pronouns are available
 #    - the cat tree is the piece standing against the blue-and-gold mural
+#    - the floor that looks like planks is VINYL, wood-adjacent rather than wood
+#
+#  MATERIAL IS NOT VISIBLE, only finish is. 'a wood floor' was vinyl and 'a maple
+#  shelving unit' was a guess at a species from a colour. A photograph shows how a
+#  surface LOOKS; what it is made of is a separate claim, and it is the same error
+#  as supplying a room for a cabinet. Describe the finish -- pale, plank-patterned,
+#  carpeted -- and leave the material to whoever owns the thing.
 #
 #  THE CAT TREE IS THE ONE AGAINST THE BLUE MURAL -- his, and it settles a thing
 #  the pixels cannot: several pieces of furniture here carry the same cream fleece,
@@ -47,9 +54,9 @@ PHOTOS = [
     ('p-0511.jpg', 'wave',  'Garnet',
      'Garnet loafing on a bright blue shag rug and looking at the camera.'),
     ('p-0527.jpg', 'clips', 'Jasper',
-     'Jasper curled up asleep in a flat Red Bull box on a wood floor.'),
+     'Jasper curled up asleep in a flat Red Bull box on a pale wood-look floor.'),
     ('p-6328.jpg', 'wave',  'Jasper & Garnet',
-     'Jasper on a maple shelving unit with Garnet on the shelf below, beside black soft-sided pet carriers.'),
+     'Jasper on a pale wood shelving unit with Garnet on the shelf below, beside black soft-sided pet carriers.'),
     ('p-0270.jpg', 'clips', 'Jasper & Garnet',
      'Jasper stretched along a platform of the cat tree, with Garnet tucked into the fleece-lined nook below.'),
     ('p-0287.jpg', 'wave',  'Jasper & Garnet',
