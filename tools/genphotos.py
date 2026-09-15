@@ -94,7 +94,9 @@ SOURCES = [
     ('202512_a', 'IMG_9078.HEIC', 'p-9078', [], None),
     ('202512_a', 'IMG_9106.HEIC', 'p-9106', [], None),
     ('202512_a', 'IMG_9169.HEIC', 'p-9169', [], None),
-    ('202512_a', 'IMG_9233.HEIC', 'p-9233', [], None),
+    # 9232 rather than 9233, 36 seconds earlier: the mouse is unmistakable under
+    # his foreleg there, where in 9233 it is mostly buried beneath him.
+    ('202512_a', 'IMG_9232.HEIC', 'p-9232', [], None),
     ('202512_a', 'IMG_9246.HEIC', 'p-9246', [], None),
     ('202512_a', 'IMG_9269.HEIC', 'p-9269', [], None),
     ('202511_a', 'IMG_8909.HEIC', 'p-8909', [], None),
