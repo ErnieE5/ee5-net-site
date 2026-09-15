@@ -28,6 +28,10 @@ from PIL import Image
 #    - the white cabinets are the kitchen's, on two walls
 #    - Garnet and Jasper are both male ('the boys'), so pronouns are available
 #    - the cat tree is the piece standing against the blue-and-gold mural
+#      ... and it is WALL-MOUNTED and wider than the mural, so its outer perches
+#      stand against plain wall. The mural behind is sufficient evidence of the
+#      tree, never necessary: p-9555 was called a 'wall shelf' on that error, and
+#      p-9246 shows the whole S-curve running past the mural's edge.
 #    - the floor that looks like planks is VINYL, wood-adjacent rather than wood
 #    - the pale shelving is an old, durable IKEA set; even he is not sure of the
 #      wood, which is the whole argument for saying 'pale wood' and stopping there
@@ -87,9 +91,9 @@ PHOTOS = [
     ("p-9576.jpg", "wave",  "Garnet",
      "Garnet standing on top of the sisal post, tail stretched out behind him."),
     ("p-9548.jpg", "clips", "Jasper",
-     "Jasper asleep with his head resting on Ernie's arm, close up."),
+     "Jasper asleep with his head resting on Ernie's leg, close up."),
     ("p-9555.jpg", "wave",  "Jasper & Garnet",
-     "Jasper mid-yawn on a wall shelf while Garnet lies in the cat tree's fleece hammock."),
+     "Jasper mid-yawn on one perch of the cat tree, while Garnet lies in the fleece hammock beside him."),
     ("p-9572.jpg", "clips", "Jasper & Garnet",
      "Jasper standing over Garnet, who is sprawled on a striped runner along the media console."),
     ("p-9334.jpg", "wave",  "Ensenada",
@@ -100,6 +104,28 @@ PHOTOS = [
      "A city skyline receding behind the ship's wake under a grey sky."),
     ("p-9583.jpg", "clips", "Ernie",
      "Ernie in a straw hat stamped ROATAN, sitting by a curved window."),
+    ("p-9246.jpg", "clips", "the cat tree",
+     "The whole cat tree: Jasper on a lower perch and Garnet on an upper one, against the blue mural."),
+    ("p-9106.jpg", "wave",  "Garnet & Jasper",
+     "Garnet in a fleece nook of the cat tree, with Jasper stretched out on the perch above."),
+    ("p-8933.jpg", "clips", "Garnet & Jasper",
+     "Garnet and Jasper curled up together in the cat tree's fleece hammock."),
+    ("p-9269.jpg", "wave",  "Garnet & Jasper",
+     "Garnet and Jasper stacked in the office chair again, Jasper propped up behind Garnet."),
+    ("p-9233.jpg", "clips", "he got a mouse",
+     "Jasper on the blue rug with a computer mouse pinned under one paw."),
+    ("p-9078.jpg", "wave",  "towel animal",
+     "A towel animal perched on the arm of a sofa, holding the TV remote."),
+    ("p-9016.jpg", "clips", "rubber duck",
+     "A giant rubber duck riding in the bridge wing of a cruise ship."),
+    ("p-5768.jpg", "wave",  "the harbour",
+     "Four cruise ships in a harbour, seen from a fort wall with people looking out over the town."),
+    ("p-8986.jpg", "clips", "Ernie",
+     "Ernie in the ROATAN hat on a balcony, colourful rooftops below."),
+    ("p-9169.jpg", "wave",  "Ernie",
+     "Ernie in the ROATAN hat and sunglasses, out on deck."),
+    ("p-8701.jpg", "clips", "Ernie",
+     "Ernie in an orange shirt in a ship's lounge, a large abstract painting behind him."),
     # Not a beast. Published only with the door number and the plate blurred out.
     ('p-4532.jpg', 'wave',  'home',
      "Ernie's house, seen from the street on a clear day, with a blue SUV parked in the driveway."),
