@@ -47,6 +47,9 @@ from PIL import Image
 #      plain wall by a window, in p-6198, p-6202 and p-6207. They look nothing like
 #      the tree, which is both why calling one of the tree's perches a 'wall shelf'
 #      was wrong and why the word is still worth having.
+#      p-5397 is the tree ASSEMBLED ON THE FLOOR before it went up, stepladder and
+#      screwdriver still out and the mural not yet painted. March 2024, which dates
+#      the whole arrangement and settles what the thing is beyond argument.
 #    - the floor that looks like planks is VINYL, wood-adjacent rather than wood
 #    - the pale shelving is an old, durable IKEA set and even he is not sure of
 #      the wood, which is the whole argument for saying "pale wood" and stopping
@@ -270,6 +273,24 @@ PHOTOS = [
      "The same moment from across the room, Garnet alone in the middle of the new rug."),
     ("p-5735.jpg", "clips", "Garnet & Jasper",
      "Garnet and Jasper dozing pressed together on a ledge below the mural."),
+    ("p-5286.jpg", "clips", "the drawers",
+     "Garnet lying in an open dresser drawer among the clothes, with Jasper tucked in behind him."),
+    ("p-5291.jpg", "wave",  "Ouiness",
+     "Ouiness at a bar under fairy lights, this line-up carrying two saxophones."),
+    ("p-5354.jpg", "clips", "Jasper",
+     "Jasper reaching a paw onto Ernie's shin, claws just out."),
+    ("p-5397.jpg", "wave",  "the cat tree",
+     "The cat tree assembled and standing in the middle of the floor, before it went up on the wall."),
+    ("p-5360.jpg", "clips", "the laser",
+     "Garnet up on his hind legs at the entryway wall, chasing a laser dot."),
+    ("p-5360e.jpg", "wave", "the laser",
+     "Garnet stalking the red laser dot along the wall, low to the floor."),
+    ("p-5362.jpg", "clips", "the laser",
+     "Garnet stretched to full height up the wall with both white paws on the laser dot."),
+    ("p-5363.jpg", "wave",  "the laser",
+     "Garnet and Jasper sitting side by side, both watching the red dot on the wall above them."),
+    ("p-5440.jpg", "clips", "Garnet",
+     "Garnet loafing under a chrome-framed coffee table in a patch of sun."),
     # Not a beast. Published only with the door number and the plate blurred out.
     ('p-4532.jpg', 'wave',  'home',
      "Ernie's house, seen from the street on a clear day, with a blue SUV parked in the driveway."),

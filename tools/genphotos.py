@@ -148,6 +148,17 @@ SOURCES = [
     ('202404_a', 'IMG_5657.HEIC', 'p-5657', [], None),
     ('202404_a', 'IMG_5658.HEIC', 'p-5658', [], None),
     ('202404_a', 'IMG_5735.HEIC', 'p-5735', [], None),
+    ('202403_a', 'IMG_5286.HEIC', 'p-5286', [], None),
+    ('202403_a', 'IMG_5291.HEIC', 'p-5291', [], None),
+    ('202403_a', 'IMG_5354.HEIC', 'p-5354', [], 1.10),
+    ('202403_a', 'IMG_5360.HEIC', 'p-5360', [], None),
+    # the edited export of the same chase; distinct stem, since the last four
+    # digits collide with IMG_5360 and would otherwise overwrite it
+    ('202403_a', 'IMG_E5360.HEIC', 'p-5360e', [], None),
+    ('202403_a', 'IMG_5362.HEIC', 'p-5362', [], None),
+    ('202403_a', 'IMG_5363.HEIC', 'p-5363', [], None),
+    ('202403_a', 'IMG_5397.HEIC', 'p-5397', [], None),
+    ('202403_a', 'IMG_5440.HEIC', 'p-5440', [], None),
 ]
 
 
