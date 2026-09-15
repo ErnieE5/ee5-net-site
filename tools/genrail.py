@@ -47,6 +47,12 @@ from PIL import Image
 #      1.3 km -- all confirmed. San Diego and Roatan have no GPS (both are edited
 #      exports), so San Diego rests on the Midway being in the frame and ROATAN is
 #      the one caption here still standing on recognition alone.
+#  A ROOM IS NOT VISIBLE EITHER, only its furnishings are. p-8701 was called a
+#  "ship's lounge" because the artwork is large and the lighting is built in; it is
+#  his stateroom. Fourth of a kind now, with the cabinet's kitchen, the cat tree's
+#  wall and the shelf's species: a photograph shows a surface or a fitting, and the
+#  place it belongs to is a separate claim.
+#
 #
 #  MATERIAL IS NOT VISIBLE, only finish is. 'a wood floor' was vinyl and 'a maple
 #  shelving unit' was a guess at a species from a colour. A photograph shows how a
@@ -136,7 +142,7 @@ PHOTOS = [
     ("p-9169.jpg", "wave",  "Ernie",
      "Ernie in the ROATAN hat and sunglasses, out on deck."),
     ("p-8701.jpg", "clips", "Ernie",
-     "Ernie in an orange shirt in a ship's lounge, a large abstract painting behind him."),
+     "Ernie in an orange shirt in his stateroom at Antigua, a large abstract painting behind him."),
     # Not a beast. Published only with the door number and the plate blurred out.
     ('p-4532.jpg', 'wave',  'home',
      "Ernie's house, seen from the street on a clear day, with a blue SUV parked in the driveway."),
