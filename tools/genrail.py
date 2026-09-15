@@ -43,6 +43,10 @@ from PIL import Image
 #      plain wall. The mural is sufficient evidence of the tree, never necessary:
 #      p-9555 was called a "wall shelf" on that error and p-9246 shows the whole
 #      S-curve running past the mural's edge
+#      AND REAL WALL SHELVES DO EXIST: a column of small black climbing steps on a
+#      plain wall by a window, in p-6198, p-6202 and p-6207. They look nothing like
+#      the tree, which is both why calling one of the tree's perches a 'wall shelf'
+#      was wrong and why the word is still worth having.
 #    - the floor that looks like planks is VINYL, wood-adjacent rather than wood
 #    - the pale shelving is an old, durable IKEA set and even he is not sure of
 #      the wood, which is the whole argument for saying "pale wood" and stopping
@@ -229,6 +233,18 @@ PHOTOS = [
      "Jasper sitting up on the kitchen counter with Garnet lying behind him, seen over a chair back."),
     ("p-6444.jpg", "wave",  "Jasper",
      "Jasper asleep on the blue shag rug with his head resting on a sandal."),
+    ("p-6154.jpg", "clips", "Ouiness",
+     "Ouiness on stage under a red glitter curtain, a larger line-up with keys, guitars and a disco ball."),
+    ("p-6195.jpg", "wave",  "Garnet",
+     "Garnet curled in a fleece hammock of the cat tree, looking back over his shoulder."),
+    ("p-6198.jpg", "clips", "Garnet & Jasper",
+     "Garnet on an upper wall step with Jasper on the one below, a column of climbing shelves by the window."),
+    ("p-6202.jpg", "wave",  "Garnet & Jasper",
+     "Garnet watching from an upper wall step while Jasper stretches head-first down to the next one."),
+    ("p-6207.jpg", "clips", "Garnet & Jasper",
+     "Garnet crouched on a wall step above Jasper, who is stretched between two of the lower ones."),
+    ("p-6300.jpg", "wave",  "Garnet & Jasper",
+     "Garnet and Jasper looking down from the top of the kitchen cabinets, where fleece mats are laid out for them."),
     # Not a beast. Published only with the door number and the plate blurred out.
     ('p-4532.jpg', 'wave',  'home',
      "Ernie's house, seen from the street on a clear day, with a blue SUV parked in the driveway."),
