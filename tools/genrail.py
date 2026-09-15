@@ -245,6 +245,12 @@ PHOTOS = [
      "Garnet crouched on a wall step above Jasper, who is stretched between two of the lower ones."),
     ("p-6300.jpg", "wave",  "Garnet & Jasper",
      "Garnet and Jasper looking down from the top of the kitchen cabinets, where fleece mats are laid out for them."),
+    ("p-5828.jpg", "clips", "Garnet & Jasper",
+     "Garnet up on a high window ledge and Jasper at the lower window, watching the garden from opposite corners of the bedroom."),
+    ("p-5830.jpg", "wave",  "Garnet & Jasper",
+     "A minute later, Garnet has settled down on the high ledge while Jasper still sits at the lower window."),
+    ("p-5912.jpg", "clips", "Garnet",
+     "Garnet dozing in a curved nook of the cat tree with one white paw hooked over the edge."),
     # Not a beast. Published only with the door number and the plate blurred out.
     ('p-4532.jpg', 'wave',  'home',
      "Ernie's house, seen from the street on a clear day, with a blue SUV parked in the driveway."),
