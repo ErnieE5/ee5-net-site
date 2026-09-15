@@ -31,6 +31,7 @@ from PIL import Image
 #    - the floor that looks like planks is VINYL, wood-adjacent rather than wood
 #    - the pale shelving is an old, durable IKEA set; even he is not sure of the
 #      wood, which is the whole argument for saying 'pale wood' and stopping there
+#    - the house in p-4532 is his own
 #
 #  MATERIAL IS NOT VISIBLE, only finish is. 'a wood floor' was vinyl and 'a maple
 #  shelving unit' was a guess at a species from a colour. A photograph shows how a
@@ -79,7 +80,7 @@ PHOTOS = [
      'Garnet looking down from an upper platform of the cat tree, with Jasper in the fleece cradle below.'),
     # Not a beast. Published only with the door number and the plate blurred out.
     ('p-4532.jpg', 'wave',  'home',
-     'A house seen from the street on a clear day, with a blue SUV parked in the driveway.'),
+     "Ernie's house, seen from the street on a clear day, with a blue SUV parked in the driveway."),
 ]
 
 SHUFFLE = """    <script>
