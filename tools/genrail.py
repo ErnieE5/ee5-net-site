@@ -59,6 +59,9 @@ from PIL import Image
 #    - OUINESS IS AN ENSEMBLE with different members each time, so it is credited
 #      as a band and nobody in it is named. LINE OF FIRE has been T.J. Wade and
 #      Anne for as long as he has known them, which is why naming those two is
+#      His caption for them, to be used verbatim in substance: "T.J. Wade & Anne
+#      Heller of jazz funk band Line of Fire". Anne's surname and the genre are
+#      his, not mine; neither is visible in any frame.
 #      safe and stays consistent across every frame they appear in.
 #
 #  THE PLACES are named with his leave to name them and be corrected. How each
@@ -174,7 +177,7 @@ PHOTOS = [
     ("p-8701.jpg", "clips", "Ernie",
      "Ernie in an orange shirt in his stateroom at Antigua, a large abstract painting behind him."),
     ("p-8497.jpg", "wave",  "Line of Fire",
-     "T.J. Wade on keys and Anne on drums, the band Line of Fire playing an Austin bar under a carnival mural and a giant pink elephant."),
+     "T.J. Wade and Anne Heller of jazz funk band Line of Fire, playing an Austin bar under a carnival mural and a giant pink elephant."),
     ("p-8909.jpg", "clips", "Ernie",
      "Ernie in a hotel in Lake Charles, Louisiana, a barber shop and a tiled column behind him."),
     ("p-8533.jpg", "wave",  "Ernie",
@@ -184,7 +187,7 @@ PHOTOS = [
     ("p-8291.jpg", "wave",  "a squirrel",
      "A squirrel sprawled flat on the patio in the heat, all four legs stretched straight out."),
     ("p-8233.jpg", "clips", "Line of Fire",
-     "T.J. Wade on keys and Anne on drums, Line of Fire playing an outdoor stage in Austin at night."),
+     "T.J. Wade and Anne Heller of jazz funk band Line of Fire, on an outdoor stage in Austin at night."),
     ("p-8571.jpg", "wave",  "leaving Miami",
      "The Miami shoreline astern as the ship leaves port."),
     ("p-8581.jpg", "clips", "at sea",
@@ -214,11 +217,11 @@ PHOTOS = [
     ("p-8060.jpg", "wave",  "Ouiness",
      "The band Ouiness playing under a carport, seven of them, with stuffed animals watching from child-sized chairs."),
     ("p-8074.jpg", "clips", "Line of Fire",
-     "Anne on drums and T.J. Wade on keys, Line of Fire playing outdoors in the evening."),
+     "T.J. Wade and Anne Heller of jazz funk band Line of Fire, playing outdoors in the evening."),
     ("p-6727.jpg", "wave",  "Garnet",
      "Garnet dozing on top of the fridge with one white paw over the edge, below the kitchen cabinets."),
     ("p-6680.jpg", "clips", "Line of Fire",
-     "T.J. Wade on keys in a light-up jacket and Anne on drums, Line of Fire under a liquid light show."),
+     "T.J. Wade and Anne Heller of jazz funk band Line of Fire, T.J. in a light-up jacket under a liquid light show."),
     ("p-6529.jpg", "wave",  "Jasper",
      "Jasper sitting among the groceries on a pantry shelf, wearing a pink collar."),
     ("p-6512.jpg", "clips", "Jasper",
@@ -251,6 +254,22 @@ PHOTOS = [
      "A minute later, Garnet has settled down on the high ledge while Jasper still sits at the lower window."),
     ("p-5912.jpg", "clips", "Garnet",
      "Garnet dozing in a curved nook of the cat tree with one white paw hooked over the edge."),
+    ("p-6020.jpg", "wave",  "Garnet",
+     "Garnet stretched out along a shelf against the blue mural, white bib and all four white paws on show."),
+    ("p-5452.jpg", "clips", "Jasper & Garnet",
+     "Jasper on top of the sisal post with Garnet sitting on its base below."),
+    ("p-5540.jpg", "wave",  "Garnet & Jasper",
+     "Garnet curled in a fluffy bed on the cat tree, with Jasper's legs on the shelf above."),
+    ("p-5648.jpg", "clips", "a new rug",
+     "Garnet and Jasper sitting on a rolled-up rug still in its tape, in the kitchen doorway."),
+    ("p-5652.jpg", "wave",  "a new rug",
+     "The same rug unrolled three hours later, Jasper up at the media console and Garnet crossing the blue shag."),
+    ("p-5657.jpg", "clips", "Garnet",
+     "Garnet sprawled out flat on the new blue rug, claiming it."),
+    ("p-5658.jpg", "wave",  "Garnet",
+     "The same moment from across the room, Garnet alone in the middle of the new rug."),
+    ("p-5735.jpg", "clips", "Garnet & Jasper",
+     "Garnet and Jasper dozing pressed together on a ledge below the mural."),
     # Not a beast. Published only with the door number and the plate blurred out.
     ('p-4532.jpg', 'wave',  'home',
      "Ernie's house, seen from the street on a clear day, with a blue SUV parked in the driveway."),
