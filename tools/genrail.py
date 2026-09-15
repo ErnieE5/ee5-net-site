@@ -90,6 +90,11 @@ from PIL import Image
 #      than sitting in a gap above it, p-6512 is him on the top edge of a door he
 #      opened, and p-6529 is him in the pantry. A cat who opens doors is why the
 #      obvious reading of 'cat near cabinet' keeps being the wrong one.
+#    - JASPER STOPS WHEN WATCHED. He abandons whatever he is doing the moment he
+#      notices attention and comes over for pets. So a Live pair that shows him
+#      still is evidence the camera was noticed, NOT that nothing was happening:
+#      p-9233 is a cat who had been playing with that mouse until the phone came
+#      out. The tool cannot see round this and neither can the still.
 #    - the 2024 frames show Jasper in a PINK COLLAR with a tag; the 2025 ones show
 #      neither cat collared. That is an observation, not something he has said, so
 #      it dates a photograph loosely and identifies nobody. The muzzle still does
@@ -201,7 +206,7 @@ PHOTOS = [
     ("p-9269.jpg", "wave",  "Garnet & Jasper",
      "Garnet and Jasper stacked in the office chair again, Jasper propped up behind Garnet."),
     ("p-9233.jpg", "clips", "he got a mouse",
-     "Jasper on the blue rug with a computer mouse pinned under one paw."),
+     "Jasper on the blue rug with a computer mouse he had been playing with, now tucked under one foreleg."),
     ("p-9078.jpg", "wave",  "towel animal",
      "A towel animal perched on the arm of a sofa, holding the TV remote."),
     ("p-9016.jpg", "clips", "rubber duck",

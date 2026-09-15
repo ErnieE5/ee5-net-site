@@ -16,6 +16,14 @@ unmistakable across ten frames.
 reasoning about the limits of stills was describing my own reading habit as a
 property of the evidence. Before captioning an action, look at the pair.
 
+WHAT IT CANNOT TELL YOU. Stillness in the pair is not evidence that nothing was
+happening. Jasper stops whatever he is doing the moment he notices he is being
+watched, and comes over for pets -- so the camera being ready is itself the thing
+that ends the activity. p-9233 is exactly that: he had been playing with the
+mouse, and the 2.5 seconds of video show a cat lying almost perfectly still,
+because by then he had clocked the phone. Absence of motion here is evidence
+about the photographer, not the cat.
+
 mpv does the decoding. It is what Ernie uses, and the alternative found on this
 machine was an ffmpeg bundled inside a fan-control application, which is not a
 dependency anything should have.
@@ -120,7 +128,10 @@ def main():
     # contains verbatim, so scratch frames committed here would be published.
     outdir = a.outdir or os.path.join('.liveframes', a.stem)
     frames = extract(mov, outdir, a.fps, a.width)
-    sheet = os.path.join(outdir, '_sheet.png')
+    # NAME THE SHEET AFTER THE SETTINGS THAT MADE IT. A fixed '_sheet.png' is
+    # overwritten by the next run, so a second pass at a different fps silently
+    # replaces the sheet someone was just told to open.
+    sheet = os.path.join(outdir, '_sheet-fps%g-w%d.png' % (a.fps, a.width))
     size = contact_sheet(frames, sheet)
     print('%s: %d frames at %g fps -> %s (%dx%d)'
           % (a.stem, len(frames), a.fps, sheet, size[0], size[1]))
