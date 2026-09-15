@@ -288,21 +288,35 @@
       and hangs metal on the corners; `wave` cuts the edge itself and hangs nothing. */
 
   /*  CLIPS: the picture stays a rectangle and four metal corners straddle it.  Pure
-      CSS -- the artwork is drawn for the upper left, so the other three are the same
-      file turned 90 degrees at a time.  `PIVOT` is easel's 14/72 straddle, which is
-      why each sits partly off the picture. */
+      CSS: the artwork is drawn for the upper left, so the other three are the same
+      file turned 90 degrees at a time.
+
+      SIZE IS TAKEN FROM THE HEIGHT, not the width.  Every picture in the rail is the
+      same height and its own width, so a width-derived clip came out 57px on a
+      portrait and 62px on a landscape, and the corners of the wide pictures no
+      longer matched the tall ones standing beside them.
+
+      THE STRADDLE IS A FRACTION OF THE CLIP, not of the picture.  `translate`
+      resolves its percentages against the element's own box, so the overhang is
+      the same on every corner of every picture whatever shape it is.  Offsetting
+      with `left`/`right` instead measured against the PICTURE's width, which is how
+      a 488px landscape ended up throwing its corners 31% out while a 275px portrait
+      threw them 19%.
+
+      PIVOT 10 OF 72, which is where frames/README.md records the walk ending:
+      "pivot 10 -- he walked 16 -> 12 -> 8 -> 10". The 14 used before this is the
+      earlier figure from the open gold form, and it sits the clips too far out. */
   .shot.clips .cl {
     position: absolute;
-    width: 21%;
-    max-width: 62px;
+    height: 15%;
     aspect-ratio: 1;
     background: url("clips/clip-gold.png") center / contain no-repeat;
     pointer-events: none;
   }
-  .shot.clips .cl.ul { left: -3.9%; top: 0; transform: translateY(-13%); }
-  .shot.clips .cl.ur { right: -3.9%; top: 0; transform: translateY(-13%) rotate(90deg); }
-  .shot.clips .cl.lr { right: -3.9%; bottom: 0; transform: translateY(13%) rotate(180deg); }
-  .shot.clips .cl.ll { left: -3.9%; bottom: 0; transform: translateY(13%) rotate(270deg); }
+  .shot.clips .cl.ul { left: 0;  top: 0;    transform: translate(-13.9%, -13.9%); }
+  .shot.clips .cl.ur { right: 0; top: 0;    transform: translate(13.9%, -13.9%) rotate(90deg); }
+  .shot.clips .cl.lr { right: 0; bottom: 0; transform: translate(13.9%, 13.9%) rotate(180deg); }
+  .shot.clips .cl.ll { left: 0;  bottom: 0; transform: translate(-13.9%, 13.9%) rotate(270deg); }
 
   /*  WAVE: the silhouette itself is the frame, so the picture is clipped to the sine
       and the same path is stroked over it.  The box-shadow edge cannot follow a
