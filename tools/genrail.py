@@ -48,6 +48,10 @@ from PIL import Image
 #      the wood, which is the whole argument for saying "pale wood" and stopping
 #    - the house in p-4532 is his own
 #    - Jasper is on his LEG in p-9548, not his arm
+#    - the 2024 frames show Jasper in a PINK COLLAR with a tag; the 2025 ones show
+#      neither cat collared. That is an observation, not something he has said, so
+#      it dates a photograph loosely and identifies nobody. The muzzle still does
+#      the identifying: Garnet's is white and shows even in profile.
 #    - OUINESS IS AN ENSEMBLE with different members each time, so it is credited
 #      as a band and nobody in it is named. LINE OF FIRE has been T.J. Wade and
 #      Anne for as long as he has known them, which is why naming those two is
@@ -211,6 +215,12 @@ PHOTOS = [
      "Garnet dozing on top of the fridge with one white paw over the edge, below the kitchen cabinets."),
     ("p-6680.jpg", "clips", "Line of Fire",
      "T.J. Wade on keys in a light-up jacket and Anne on drums, Line of Fire under a liquid light show."),
+    ("p-6529.jpg", "wave",  "Jasper",
+     "Jasper sitting among the groceries on a pantry shelf, wearing a pink collar."),
+    ("p-6512.jpg", "clips", "Jasper",
+     "Jasper perched on the kitchen counter, peering down into an opened cabinet at the pull-out hamper."),
+    ("p-6566.jpg", "wave",  "Jasper",
+     "Jasper looking down from the top of the fridge, in the gap above the kitchen cabinets."),
     # Not a beast. Published only with the door number and the plate blurred out.
     ('p-4532.jpg', 'wave',  'home',
      "Ernie's house, seen from the street on a clear day, with a blue SUV parked in the driveway."),
