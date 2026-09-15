@@ -37,7 +37,11 @@ DESK_B_L = (0, 480, 820, 1060, 24, 11)     # 9543: paperwork, left
 DESK_B_M = (1590, 420, 2390, 820, 24, 11)  # 9543: the letter beside the keyboard
 DESK_B_BIN = (0, 1360, 360, 1810, 22, 10)  # 9543: papers in the bin
 
-#  file, stem, redactions, tone
+#  A blemish, not a redaction: nothing here is being hidden from anyone, it is
+#  just a mark he would rather not have on the front page. (x0,y0,x1,y1,feather).
+NOSE = [(926, 1592, 974, 1630, 6), (898, 1616, 958, 1648, 6)]
+
+#  file, stem, redactions, tone, heals
 #  `tone` is a shadow-lift gamma: >1 brightens shadows and midtones and leaves
 #  highlights where they are.
 SOURCES = [
@@ -84,6 +88,11 @@ SOURCES = [
     ('202512_a', 'IMG_9233.HEIC', 'p-9233', [], None),
     ('202512_a', 'IMG_9246.HEIC', 'p-9246', [], None),
     ('202512_a', 'IMG_9269.HEIC', 'p-9269', [], None),
+    ('202511_a', 'IMG_8909.HEIC', 'p-8909', [], None),
+    # Stage light is hard shadow and saturated colour; a small lift opens the
+    # faces without touching the neon, which is already at the top of the range.
+    ('202510_a', 'IMG_8497.HEIC', 'p-8497', [], 1.12),
+    ('202510_a', 'IMG_8533.HEIC', 'p-8533', [], None, NOSE),
 ]
 
 
@@ -114,6 +123,33 @@ def soft_blur(im, box):
     im.paste(reg, (cx0, cy0))
     return im
 
+
+def inpaint(im, spec, iters=26, pad=26):
+    """Fill a small region with an interpolation of the skin around it.
+
+    NOT a clone stamp. There is no good donor patch for a blemish on a face lit
+    from one side: any skin lifted from beside it arrives at the wrong brightness
+    and lands as a visible rectangle, which is more conspicuous than the mark it
+    replaced. Tried that first; it looked worse.
+
+    The hole is filled from its own boundary instead. Each pass blurs the current
+    state and keeps that result only INSIDE the hole, restoring everything outside
+    it, so colour creeps inward from the rim a little further every pass until the
+    hole holds a smooth continuation of its surroundings. Cheap, and exactly right
+    for a small mark on an otherwise even surface.
+    """
+    x0, y0, x1, y1, feather = spec
+    cx0, cy0 = max(0, x0 - pad), max(0, y0 - pad)
+    cx1, cy1 = min(im.width, x1 + pad), min(im.height, y1 + pad)
+    reg = im.crop((cx0, cy0, cx1, cy1))
+    hole = Image.new('L', reg.size, 0)
+    ImageDraw.Draw(hole).ellipse((x0 - cx0, y0 - cy0, x1 - cx0 - 1, y1 - cy0 - 1), fill=255)
+    cur = reg.copy()
+    for _ in range(iters):
+        cur = Image.composite(cur.filter(ImageFilter.GaussianBlur(5)), reg, hole)
+    reg.paste(cur, (0, 0), hole.filter(ImageFilter.GaussianBlur(feather)))
+    im.paste(reg, (cx0, cy0))
+    return im
 
 def shadow_lift(im, gamma):
     """Brighten shadows and midtones, leaving highlights alone.
@@ -151,7 +187,9 @@ def build():
 
     os.makedirs(OUT, exist_ok=True)
     rows = []
-    for folder, fname, stem, redactions, tone in SOURCES:
+    for row in SOURCES:
+        folder, fname, stem, redactions, tone = row[:5]
+        heals = row[5] if len(row) > 5 else []
         src = os.path.join(SRC_ROOT, folder, fname)
         if not os.path.exists(src):
             raise SystemExit('missing original: %s' % src)
@@ -159,6 +197,8 @@ def build():
         im = ImageOps.exif_transpose(Image.open(src)).convert('RGB')
         for box in redactions:
             im = soft_blur(im, box)
+        for spec in heals:
+            im = inpaint(im, spec)
         if tone:
             im = shadow_lift(im, tone)
 
@@ -180,6 +220,8 @@ def build():
         note = []
         if redactions:
             note.append('%d redacted' % len(redactions))
+        if heals:
+            note.append('%d healed' % len(heals))
         if tone:
             note.append('tone %.2f' % tone)
         print('%-8s %4dx%-4d  jpg %6.1f KB   webp %6.1f KB   %+5.1f%%%s'

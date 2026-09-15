@@ -9,75 +9,70 @@ the page knows how many there are.
 import re, sys, os
 from PIL import Image
 
-#  Garnet is the one with the white bib; Jasper has none. Every attribution below
-#  was made from the markings in the photograph itself, not from the order they
-#  were handed over.
+#  WHAT IS IN THESE PICTURES, and how each claim is known. Read this before
+#  writing a caption; it exists because most of it was got wrong once first.
 #
-#  ALT TEXT DESCRIBES WHAT IS IN THE FRAME, and only that. It is not the place to
-#  infer how many storeys a house has, or which pronoun a cat takes -- none of
-#  which the pixels say. A description that states
-#  more than the picture shows is wrong in the one place nobody sighted will catch
-#  it, because the only people reading it cannot check it against the image.
+#  THE CATS. Garnet has the white bib and white paws; Jasper has neither. Every
+#  attribution here was made from the markings in the frame, not from the order
+#  the files arrived. Both are male ("the boys"), so pronouns are available.
 #
-#  BUT A FACT HE SUPPLIES IS NOT AN INFERENCE. 'kitchen cabinet' was scrubbed to
-#  'a tall white cabinet' because the frame holds only a cabinet top and a bare
-#  wall -- and it was right: the white cabinets run along two walls of the kitchen
-#  and the boys like being up there. The caution is against ASSERTING what cannot
-#  be seen, never against keeping what the owner has told you. Facts he gives are
-#  recorded here so a later pass does not tidy them away a second time:
-#    - the white cabinets are the kitchen's, on two walls
-#    - Garnet and Jasper are both male ('the boys'), so pronouns are available
-#    - the cat tree is the piece standing against the blue-and-gold mural
-#      ... and it is WALL-MOUNTED and wider than the mural, so its outer perches
-#      stand against plain wall. The mural behind is sufficient evidence of the
-#      tree, never necessary: p-9555 was called a 'wall shelf' on that error, and
-#      p-9246 shows the whole S-curve running past the mural's edge.
+#  ALT TEXT DESCRIBES WHAT IS IN THE FRAME, and only that. A description that
+#  states more than the picture shows is wrong in the one place nobody sighted
+#  will catch it, because the people relying on it cannot check it against the
+#  image. Four mistakes of one kind were made here before that sank in:
+#
+#    a cabinet got a KITCHEN       - which turned out to be true, see below
+#    the cat tree got a WALL       - the dark timber filling p-0645 IS the tree,
+#                                    and the blue in its gaps is the mural behind
+#    the shelving got MAPLE        - a species guessed from a colour
+#    a stateroom got a LOUNGE      - p-8701, because the art is big and the
+#                                    lighting built in
+#
+#  The move is always the same: the photograph shows a SURFACE or a FITTING, and
+#  the place or substance it belongs to is a separate claim. Describe the finish
+#  and the fitting; leave the room and the material to whoever owns them.
+#
+#  BUT A FACT HE SUPPLIES IS NOT AN INFERENCE. "kitchen cabinet" was scrubbed for
+#  being unverifiable and it was simply true. The caution is against ASSERTING
+#  what cannot be seen, never against keeping what the owner has said. His facts
+#  are recorded here so a later pass cannot tidy them away again:
+#
+#    - the white cabinets are the kitchen's, running along two walls
+#    - the cat tree is the piece against the blue-and-gold mural, AND it is
+#      wall-mounted and wider than that mural, so its outer perches stand against
+#      plain wall. The mural is sufficient evidence of the tree, never necessary:
+#      p-9555 was called a "wall shelf" on that error and p-9246 shows the whole
+#      S-curve running past the mural's edge
 #    - the floor that looks like planks is VINYL, wood-adjacent rather than wood
-#    - the pale shelving is an old, durable IKEA set; even he is not sure of the
-#      wood, which is the whole argument for saying 'pale wood' and stopping there
+#    - the pale shelving is an old, durable IKEA set and even he is not sure of
+#      the wood, which is the whole argument for saying "pale wood" and stopping
 #    - the house in p-4532 is his own
-#    - the places are named from recognition, with his leave to name them and be
-#      corrected. San Diego is settled by the USS Midway at the pier and the twin
-#      Hyatt towers; Cabo by the arch itself; Ensenada is READ, its sign is in the
-#      frame. St Thomas and Roatan are the softer two. The port in p-0008 is not
-#      named from the frame -- nothing in it says which port. Its GPS did: Cozumel.
-#      THE EXIF GPS IN THE ORIGINALS SETTLED THE REST, his suggestion, and it is
-#      the right instrument: the coordinates never ship, so checking against them
-#      costs nothing. Cabo 0.6 km, Ensenada 0.6 km, San Juan 0.7 km, St Thomas
-#      1.3 km -- all confirmed. San Diego and Roatan have no GPS (both are edited
-#      exports), so San Diego rests on the Midway being in the frame and ROATAN is
-#      exports. San Diego rests on the Midway being in the frame.
+#    - Jasper is on his LEG in p-9548, not his arm
 #
-#      BRACKETING SETTLED BOTH OF THOSE ANYWAY, his second suggestion carried a
-#      step further: an edited export loses its GPS, but the frames shot either
-#      side of it in the same folder kept theirs, and a ship in port does not move.
-#      Roatan is bracketed at 16.313,-86.544 and 16.270,-86.575, both on the
-#      island. The deck shot is bracketed 98 minutes each way at the Cozumel
-#      piers, 290 m apart, which is one berth and a whole day alongside.
+#  THE PLACES are named with his leave to name them and be corrected. How each
+#  one is known, because the confidence is not uniform:
 #
-#      AND IT PROVED THE HAT IS NOT EVIDENCE: the ROATAN hat is being worn at
-#      COZUMEL in that frame. Roatan's caption leaned partly on it, which was the
-#      weakness named at the time; the coordinates carry it now, not the souvenir.
-#  A ROOM IS NOT VISIBLE EITHER, only its furnishings are. p-8701 was called a
-#  "ship's lounge" because the artwork is large and the lighting is built in; it is
-#  his stateroom. Fourth of a kind now, with the cabinet's kitchen, the cat tree's
-#  wall and the shelf's species: a photograph shows a surface or a fitting, and the
-#  place it belongs to is a separate claim.
+#    READ FROM THE FRAME   Ensenada (the sign is in it), San Diego (the USS
+#                          Midway at the pier, the twin Hyatt towers)
+#    OWN GPS               Cabo 0.6 km, Ensenada 0.6 km, San Juan 0.7 km,
+#                          St Thomas 1.3 km, Cozumel, Antigua, Lake Charles
+#    BRACKETED             an edited export loses its GPS but keeps its clock,
+#                          and the frames either side of it kept both. Roatan
+#                          sits between 16.313,-86.544 and 16.270,-86.575; the
+#                          deck shot between two Cozumel readings 98 minutes
+#                          each way and 290 m apart, which is one berth and a
+#                          day alongside
 #
+#  AND THE HAT IS NOT EVIDENCE. Roatan's caption once leaned partly on the ROATAN
+#  hat; that hat is on his head at COZUMEL in p-9169. A souvenir travels, so it
+#  locates nothing. Coordinates carry that caption now.
 #
-#  MATERIAL IS NOT VISIBLE, only finish is. 'a wood floor' was vinyl and 'a maple
-#  shelving unit' was a guess at a species from a colour. A photograph shows how a
-#  surface LOOKS; what it is made of is a separate claim, and it is the same error
-#  as supplying a room for a cabinet. Describe the finish -- pale, plank-patterned,
-#  carpeted -- and leave the material to whoever owns the thing.
+#  BRACKETING HAS A LIMIT, and p-8533 is past it: no GPS, and its nearest
+#  geotagged neighbour is 8.7 HOURS earlier on a day running Austin, Houston,
+#  Lake Charles. Two readings an hour either side of a moored ship pin it; one
+#  reading half a day earlier during a drive pins nothing. Last known position is
+#  not evidence, so that caption names no place.
 #
-#  THE CAT TREE IS THE ONE AGAINST THE BLUE MURAL -- his, and it settles a thing
-#  the pixels cannot: several pieces of furniture here carry the same cream fleece,
-#  so "fleece bed" does not identify which. Where the mural is behind, it is the
-#  tree; a shelf is only called a shelf where it is plainly mounted on a wall.
-#  p-0645 was captioned 'against a wood-panelled wall' on exactly that mistake: the
-#  dark timber filling that frame IS the tree, and the blue showing through its gaps
-#  is the mural behind it. Structure in the foreground is not the room.
 #        file            style    label              alt text
 PHOTOS = [
     ('p-0667.jpg', 'clips', 'Garnet',
@@ -154,6 +149,12 @@ PHOTOS = [
      "Ernie in the ROATAN hat and sunglasses, out on deck at Cozumel."),
     ("p-8701.jpg", "clips", "Ernie",
      "Ernie in an orange shirt in his stateroom at Antigua, a large abstract painting behind him."),
+    ("p-8497.jpg", "wave",  "Line of Fire",
+     "T.J. Wade on keys and Anne on drums, the band Line of Fire playing an Austin bar under a carnival mural and a giant pink elephant."),
+    ("p-8909.jpg", "clips", "Ernie",
+     "Ernie in a hotel in Lake Charles, Louisiana, a barber shop and a tiled column behind him."),
+    ("p-8533.jpg", "wave",  "Ernie",
+     "Ernie in a black cowboy hat with a patterned band, city lights through the window behind him."),
     # Not a beast. Published only with the door number and the plate blurred out.
     ('p-4532.jpg', 'wave',  'home',
      "Ernie's house, seen from the street on a clear day, with a blue SUV parked in the driveway."),
