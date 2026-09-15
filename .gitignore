@@ -1,0 +1,5 @@
+# Machine-written, not source. Everything in this repo is served verbatim at
+# https://ee5.net/<path>, so anything that lands here is published -- bytecode
+# caches included.
+__pycache__/
+*.pyc
