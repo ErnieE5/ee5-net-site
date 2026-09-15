@@ -460,6 +460,42 @@
         <span class="rid-p">p-4532</span>
       </li>
     </ul>
+    <script>
+    /*  THE HANG IS RESHUFFLED ON EVERY LOAD.
+
+        This runs INLINE, immediately after the list it reorders, and that
+        placement is the whole trick: parsing stops at a synchronous script, so
+        the reordering happens before the browser has painted anything.  The same
+        code at the end of <body> would show the authored order first and visibly
+        snap into a new one.
+
+        Fisher-Yates, walking down and swapping with a random earlier index --
+        every permutation equally likely.  Sorting by `Math.random() - 0.5`
+        instead is the usual shortcut and it is biased, because a comparator that
+        answers differently each time it is asked about the same pair is not an
+        ordering and the sort's result depends on its algorithm.
+
+        `loading` is then re-decided FROM THE NEW ORDER.  It was authored as eager
+        for the first three, but after a shuffle those three are somewhere else,
+        and a lazily-loaded picture in the leftmost frame arrives late in the one
+        position where it is certain to be looked at. */
+    (function () {
+      var rail = document.currentScript.previousElementSibling;
+      if (!rail || rail.tagName !== 'UL') return;
+      var items = [].slice.call(rail.children), i, j;
+      for (i = items.length - 1; i > 0; i--) {
+        j = Math.floor(Math.random() * (i + 1));
+        if (i !== j) { var t = items[i]; items[i] = items[j]; items[j] = t; }
+      }
+      var frag = document.createDocumentFragment();
+      items.forEach(function (li, n) {
+        var img = li.querySelector('img');
+        if (img) img.loading = n < 3 ? 'eager' : 'lazy';
+        frag.appendChild(li);
+      });
+      rail.appendChild(frag);
+    })();
+    </script>
   </div>
   <!-- RAIL-END -->
   </section>
