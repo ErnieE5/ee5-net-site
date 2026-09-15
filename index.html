@@ -272,6 +272,12 @@
     display: block;
     height: 100%;
     width: auto;
+    /*  BACKING BOARD. The frame is drawn from width/height before the bytes
+        arrive, so between paint and load there is a lit, clipped, gold-cornered
+        frame with the wall showing straight through it -- which reads as a
+        broken image rather than one still coming. A ground darker than the felt
+        makes that moment read as a mounted plate that has not been printed yet. */
+    background: #12203c;
     /*  The dark line under everything: easel's own answer to an edge that would not
         read as an edge against its ground (frames/README.md, 2026-08-30). */
     box-shadow: 0 0 0 1px rgba(0,0,0,.63), 0 10px 26px rgba(0,0,0,.34);
