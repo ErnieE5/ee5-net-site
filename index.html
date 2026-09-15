@@ -117,13 +117,13 @@
       no-JS floor; when the script runs it adds `.waved`, which hands the whole silhouette
       -- fill and stroke both -- to an SVG path, so the box is genuinely non-rectangular
       rather than a wavy line drawn over a rectangle.
-      PADDING IS DERIVED, NOT PICKED.  The edge's centreline sits at AMP+STROKE (12.5) and
-      the trough swings a further AMP inward, so the wave reaches 23.5px into the box; the
+      PADDING IS DERIVED, NOT PICKED.  The edge's centreline sits at AMP+STROKE (5.5) and
+      the trough swings a further AMP inward, so the wave reaches 9.5px into the box; the
       text has to start past that or the swell runs through the first line. */
   a.rgn {
     position: relative;
     display: block;
-    padding: 1.9rem 2.1rem 1.75rem;
+    padding: 1.15rem 1.45rem 1.05rem;
     border: 1.5px solid var(--rule);
     border-radius: 3px;
     background: var(--panel);
@@ -157,7 +157,7 @@
   a.rgn .rid-h {
     position: absolute;
     top: -.62em;
-    left: 2.1rem;
+    left: 1.45rem;
     padding: 0 .35rem;
     background: var(--bg);
     font: 600 .72rem/1 var(--mono);
@@ -170,8 +170,8 @@
       still instead of dancing as the digits change. */
   a.rgn .dim-h {
     position: absolute;
-    right: 2.1rem;
-    bottom: .85rem;
+    right: 1.45rem;
+    bottom: .62rem;
     font: .68rem/1 var(--mono);
     color: var(--muted);
     font-variant-numeric: tabular-nums;
@@ -394,7 +394,7 @@
       ~28 cycles across an edge and reads as a torn edge rather than a wave.  The mechanism
       is unchanged -- constant period, constant stroke, redrawn not stretched -- only the
       constants are sized to the box they are drawn on. */
-  var PERIOD = 200, AMP = 11, STROKE = 1.5;
+  var PERIOD = 240, AMP = 4, STROKE = 1.5;
   var SVGNS = 'http://www.w3.org/2000/svg';
 
   function sineRect(w, h) {
