@@ -37,6 +37,15 @@ DESK_B_L = (0, 480, 820, 1060, 24, 11)     # 9543: paperwork, left
 DESK_B_M = (1590, 420, 2390, 820, 24, 11)  # 9543: the letter beside the keyboard
 DESK_B_BIN = (0, 1360, 360, 1810, 22, 10)  # 9543: papers in the bin
 
+#  The driveway shot. The plate is the obvious one; the SUBDIVISION MONUMENT
+#  across the street is the one that nearly got through, and it names the
+#  development, which is the same class of fact as the door number already
+#  blurred in p-4532. A photograph of a house does not have to show its number
+#  to say where it is.
+DRIVE_PLATE = (3270, 1920, 3348, 2092, 13, 7)
+DRIVE_SIGN  = (3462, 1210, 3668, 1318, 15, 8)
+DRIVE_SIGN2 = (3788, 1276, 3978, 1358, 14, 7)
+
 #  A blemish, not a redaction: nothing here is being hidden from anyone, it is
 #  just a mark he would rather not have on the front page. (x0,y0,x1,y1,feather).
 NOSE = [(926, 1592, 974, 1630, 6), (898, 1616, 958, 1648, 6)]
@@ -106,6 +115,11 @@ SOURCES = [
     # Night stage, so a small lift opens the players without touching the lamps.
     ('202508_a', 'IMG_8233.HEIC', 'p-8233', [], 1.15),
     ('202508_a', 'IMG_8291.HEIC', 'p-8291', [], None),
+    ('202507_a', 'IMG_8083.HEIC', 'p-8083', [DRIVE_PLATE, DRIVE_SIGN, DRIVE_SIGN2], None),
+    ('202507_a', 'IMG_8086.HEIC', 'p-8086', [], None),
+    ('202507_a', 'IMG_8142.HEIC', 'p-8142', [], None),
+    ('202507_a', 'IMG_8158.HEIC', 'p-8158', [], None),
+    ('202507_a', 'IMG_8168.HEIC', 'p-8168', [], None),
 ]
 
 

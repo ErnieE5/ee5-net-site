@@ -66,6 +66,13 @@ from PIL import Image
 #  AND THE HAT IS NOT EVIDENCE. Roatan's caption once leaned partly on the ROATAN
 #  hat; that hat is on his head at COZUMEL in p-9169. A souvenir travels, so it
 #  locates nothing. Coordinates carry that caption now.
+#  A HOUSE DOES NOT HAVE TO SHOW ITS NUMBER TO SAY WHERE IT IS. p-8083 looks out
+#  across the street at the SUBDIVISION MONUMENT, which names the development.
+#  That is the same class of fact as the door number already blurred in p-4532,
+#  and it nearly went out because the check had been "find the number and the
+#  plate" rather than "find what locates this house". Both are blurred now, with
+#  two smaller signs beside it. p-4532 itself was re-swept and carries no signage.
+#
 #  PRECISION HAS A LIMIT TOO. The four Dominican frames sit between Taino Bay and
 #  Amber Cove, the two Puerto Plata cruise ports, about 500 m from one and 1.3 km
 #  from the other. That is not enough to pick one, so the caption names the city
@@ -184,9 +191,19 @@ PHOTOS = [
      "Leaving Road Town, Tortola under a heavy sky, the pier falling astern."),
     ("p-8353.jpg", "wave",  "Ernie",
      "Ernie on deck at Galveston, the ship's glass canopy behind him."),
+    ("p-8158.jpg", "wave",  "who me",
+     "Jasper sitting innocently on the paper towel roll he has just unrolled across the rug."),
+    ("p-8168.jpg", "clips", "Jasper & Garnet",
+     "Jasper and Garnet both up on their hind legs at the window, reaching towards the feeder."),
+    ("p-8086.jpg", "wave",  "Jasper & Garnet",
+     "Jasper stretched up the window with Garnet sitting beside him, both watching the feeder."),
+    ("p-8142.jpg", "clips", "a squirrel",
+     "A squirrel clinging to the wall to raid a lantern-shaped bird feeder over the fence."),
     # Not a beast. Published only with the door number and the plate blurred out.
     ('p-4532.jpg', 'wave',  'home',
      "Ernie's house, seen from the street on a clear day, with a blue SUV parked in the driveway."),
+    ("p-8083.jpg", "wave",  "home",
+     "The blue SUV on the driveway at Ernie's house, the porch and garage behind it."),
 ]
 
 SHUFFLE = """    <script>
