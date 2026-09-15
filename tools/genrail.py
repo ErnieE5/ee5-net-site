@@ -29,6 +29,8 @@ from PIL import Image
 #    - Garnet and Jasper are both male ('the boys'), so pronouns are available
 #    - the cat tree is the piece standing against the blue-and-gold mural
 #    - the floor that looks like planks is VINYL, wood-adjacent rather than wood
+#    - the pale shelving is an old, durable IKEA set; even he is not sure of the
+#      wood, which is the whole argument for saying 'pale wood' and stopping there
 #
 #  MATERIAL IS NOT VISIBLE, only finish is. 'a wood floor' was vinyl and 'a maple
 #  shelving unit' was a guess at a species from a colour. A photograph shows how a
