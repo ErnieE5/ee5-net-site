@@ -40,7 +40,13 @@ from PIL import Image
 #      corrected. San Diego is settled by the USS Midway at the pier and the twin
 #      Hyatt towers; Cabo by the arch itself; Ensenada is READ, its sign is in the
 #      frame. St Thomas and Roatan are the softer two. The port in p-0008 is not
-#      named, because nothing in that frame says which one it is.
+#      named from the frame -- nothing in it says which port. Its GPS did: Cozumel.
+#      THE EXIF GPS IN THE ORIGINALS SETTLED THE REST, his suggestion, and it is
+#      the right instrument: the coordinates never ship, so checking against them
+#      costs nothing. Cabo 0.6 km, Ensenada 0.6 km, San Juan 0.7 km, St Thomas
+#      1.3 km -- all confirmed. San Diego and Roatan have no GPS (both are edited
+#      exports), so San Diego rests on the Midway being in the frame and ROATAN is
+#      the one caption here still standing on recognition alone.
 #
 #  MATERIAL IS NOT VISIBLE, only finish is. 'a wood floor' was vinyl and 'a maple
 #  shelving unit' was a guess at a species from a colour. A photograph shows how a
@@ -79,8 +85,8 @@ PHOTOS = [
      "Jasper curled asleep in one of the cat tree's fleece cradles, one paw hooked over the edge."),
     ('p-3038.jpg', 'clips', 'St Thomas',
      'The Norwegian Viva at her berth in Charlotte Amalie, St Thomas, seen from the hillside above the harbour.'),
-    ('p-0008.jpg', 'wave', 'Norwegian Viva',
-     'The bow of the Norwegian Viva at the pier, the Celebrity Silhouette moored alongside.'),
+    ('p-0008.jpg', 'wave',  'Cozumel',
+     "The bow of the Norwegian Viva at the pier in Cozumel, the Celebrity Silhouette moored alongside."),
     ('p-0053.jpg', 'clips', 'Garnet',
      'Garnet sprawled on the blue shag rug, cheek resting in a cupped hand.'),
     ('p-0123.jpg', 'wave',  'Garnet & Jasper',
