@@ -41,6 +41,10 @@ from PIL import Image
 #                                    and he is climbing out of the cabinet itself
 #    a shoe got called a SANDAL    - p-6444, and it is a laced running shoe with a
 #                                    padded collar and a logo on the side
+#    a roll got called ASLEEP      - p-6444 again. He was ROLLING on the shoe. A
+#                                    still cannot show motion, and a cat with its
+#                                    eyes scrunched mid-roll is indistinguishable
+#                                    from a cat dozing. His, and unguessable.
 #
 #  The move is always the same: the photograph shows a SURFACE or a FITTING, and
 #  the place or substance it belongs to is a separate claim. Describe the finish
@@ -257,7 +261,7 @@ PHOTOS = [
     ("p-6411.jpg", "clips", "Jasper & Garnet",
      "Jasper sitting up on the kitchen counter with Garnet lying behind him, seen over a chair back."),
     ("p-6444.jpg", "wave",  "Jasper",
-     "Jasper asleep on the blue shag rug with his head resting on a running shoe."),
+     "Jasper rolling around on a running shoe on the blue shag rug."),
     ("p-6154.jpg", "clips", "Ouiness",
      "Ouiness on stage under a red glitter curtain, a larger line-up with keys, guitars and a disco ball."),
     ("p-6195.jpg", "wave",  "Garnet",
