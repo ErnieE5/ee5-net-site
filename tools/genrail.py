@@ -37,6 +37,8 @@ from PIL import Image
 #    a cat got the COUNTER         - p-6512, and he is balanced on the top edge of
 #                                    the open cabinet DOOR, an inch of board with
 #                                    his tail down the inside face of it
+#    a cabinet got a GAP           - p-6566, and there is no gap: the door is open
+#                                    and he is climbing out of the cabinet itself
 #
 #  The move is always the same: the photograph shows a SURFACE or a FITTING, and
 #  the place or substance it belongs to is a separate claim. Describe the finish
@@ -65,6 +67,11 @@ from PIL import Image
 #      the wood, which is the whole argument for saying "pale wood" and stopping
 #    - the house in p-4532 is his own
 #    - Jasper is on his LEG in p-9548, not his arm
+#    - JASPER OPENS CABINETS and sleeps inside them, regularly. His. It explains
+#      three frames at once: p-6566 is him coming OUT of an upper cabinet rather
+#      than sitting in a gap above it, p-6512 is him on the top edge of a door he
+#      opened, and p-6529 is him in the pantry. A cat who opens doors is why the
+#      obvious reading of 'cat near cabinet' keeps being the wrong one.
 #    - the 2024 frames show Jasper in a PINK COLLAR with a tag; the 2025 ones show
 #      neither cat collared. That is an observation, not something he has said, so
 #      it dates a photograph loosely and identifies nobody. The muzzle still does
@@ -240,7 +247,7 @@ PHOTOS = [
     ("p-6512.jpg", "clips", "Jasper",
      "Jasper balanced on the top edge of an open cabinet door, front paws braced against the counter, nosing at the wall."),
     ("p-6566.jpg", "wave",  "Jasper",
-     "Jasper looking down from the top of the fridge, in the gap above the kitchen cabinets."),
+     "Jasper coming out of an upper kitchen cabinet he has opened himself, looking down over the top of the fridge."),
     ("p-6132.jpg", "clips", "in my drawers",
      "Garnet sitting in an open dresser drawer among the clothes, with Jasper on the dresser behind him."),
     ("p-6322.jpg", "wave",  "Garnet & Jasper",
