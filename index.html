@@ -268,6 +268,11 @@
     height: clamp(210px, 42vh, 420px);
     scroll-snap-align: center;
   }
+  /*  <picture> is a wrapper with no box of its own to contribute: `display: contents`
+      drops it out of the layout so the <img> inside is still a direct flex/relative
+      child of .shot. Without it the image would size against the wrapper's auto
+      height rather than the rail's uniform one, and every frame would collapse. */
+  .shot picture { display: contents; }
   .shot img {
     display: block;
     height: 100%;
@@ -467,41 +472,62 @@
   <div class="railwrap">
     <ul class="rail" tabindex="0" role="region" aria-label="Photographs">
       <li class="shot clips">
-        <img src="photos/p-0667.jpg" alt="Garnet, a tabby cat with a white bib and white paws, sitting upright on top of a carpeted scratching post."
-             width="1200" height="1600" loading="eager" decoding="async">
+        <picture>
+          <source srcset="photos/p-0667.webp" type="image/webp">
+          <img src="photos/p-0667.jpg" alt="Garnet, a tabby cat with a white bib and white paws, sitting upright on top of a carpeted scratching post."
+               width="1200" height="1600" loading="eager" decoding="async">
+        </picture>
         <span class="cap-t" aria-hidden="true">Garnet, a tabby cat with a white bib and white paws, sitting upright on top of a carpeted scratching post.</span>
         <span class="cl ul"></span><span class="cl ur"></span><span class="cl lr"></span><span class="cl ll"></span>
       </li>
       <li class="shot wave">
-        <img src="photos/p-0677.jpg" alt="Jasper and Garnet lying side by side on top of a tall white cabinet, peering over the edge."
-             width="1200" height="1600" loading="eager" decoding="async">
+        <picture>
+          <source srcset="photos/p-0677.webp" type="image/webp">
+          <img src="photos/p-0677.jpg" alt="Jasper and Garnet lying side by side on top of a tall white cabinet, peering over the edge."
+               width="1200" height="1600" loading="eager" decoding="async">
+        </picture>
         <span class="cap-t" aria-hidden="true">Jasper and Garnet lying side by side on top of a tall white cabinet, peering over the edge.</span>
       </li>
       <li class="shot clips">
-        <img src="photos/p-0645.jpg" alt="Garnet looking out from a curved dark cat perch, with Jasper in another perch below, against a wood-panelled wall."
-             width="1200" height="1600" loading="eager" decoding="async">
+        <picture>
+          <source srcset="photos/p-0645.webp" type="image/webp">
+          <img src="photos/p-0645.jpg" alt="Garnet looking out from a curved dark cat perch, with Jasper in another perch below, against a wood-panelled wall."
+               width="1200" height="1600" loading="eager" decoding="async">
+        </picture>
         <span class="cap-t" aria-hidden="true">Garnet looking out from a curved dark cat perch, with Jasper in another perch below, against a wood-panelled wall.</span>
         <span class="cl ul"></span><span class="cl ur"></span><span class="cl lr"></span><span class="cl ll"></span>
       </li>
       <li class="shot wave">
-        <img src="photos/p-0511.jpg" alt="Garnet loafing on a bright blue shag rug and looking at the camera."
-             width="1200" height="1600" loading="lazy" decoding="async">
+        <picture>
+          <source srcset="photos/p-0511.webp" type="image/webp">
+          <img src="photos/p-0511.jpg" alt="Garnet loafing on a bright blue shag rug and looking at the camera."
+               width="1200" height="1600" loading="lazy" decoding="async">
+        </picture>
         <span class="cap-t" aria-hidden="true">Garnet loafing on a bright blue shag rug and looking at the camera.</span>
       </li>
       <li class="shot clips">
-        <img src="photos/p-0527.jpg" alt="Jasper curled up asleep in a flat Red Bull box on a wood floor."
-             width="1600" height="1200" loading="lazy" decoding="async">
+        <picture>
+          <source srcset="photos/p-0527.webp" type="image/webp">
+          <img src="photos/p-0527.jpg" alt="Jasper curled up asleep in a flat Red Bull box on a wood floor."
+               width="1600" height="1200" loading="lazy" decoding="async">
+        </picture>
         <span class="cap-t" aria-hidden="true">Jasper curled up asleep in a flat Red Bull box on a wood floor.</span>
         <span class="cl ul"></span><span class="cl ur"></span><span class="cl lr"></span><span class="cl ll"></span>
       </li>
       <li class="shot wave">
-        <img src="photos/p-6328.jpg" alt="Jasper on a maple shelving unit with Garnet on the shelf below, beside black soft-sided pet carriers."
-             width="1200" height="1600" loading="lazy" decoding="async">
+        <picture>
+          <source srcset="photos/p-6328.webp" type="image/webp">
+          <img src="photos/p-6328.jpg" alt="Jasper on a maple shelving unit with Garnet on the shelf below, beside black soft-sided pet carriers."
+               width="1200" height="1600" loading="lazy" decoding="async">
+        </picture>
         <span class="cap-t" aria-hidden="true">Jasper on a maple shelving unit with Garnet on the shelf below, beside black soft-sided pet carriers.</span>
       </li>
       <li class="shot clips">
-        <img src="photos/p-4532.jpg" alt="A house seen from the street on a clear day, with a blue SUV parked in the driveway."
-             width="1600" height="1200" loading="lazy" decoding="async">
+        <picture>
+          <source srcset="photos/p-4532.webp" type="image/webp">
+          <img src="photos/p-4532.jpg" alt="A house seen from the street on a clear day, with a blue SUV parked in the driveway."
+               width="1600" height="1200" loading="lazy" decoding="async">
+        </picture>
         <span class="cap-t" aria-hidden="true">A house seen from the street on a clear day, with a blue SUV parked in the driveway.</span>
         <span class="cl ul"></span><span class="cl ur"></span><span class="cl lr"></span><span class="cl ll"></span>
       </li>
