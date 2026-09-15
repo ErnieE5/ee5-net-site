@@ -39,6 +39,8 @@ from PIL import Image
 #                                    his tail down the inside face of it
 #    a cabinet got a GAP           - p-6566, and there is no gap: the door is open
 #                                    and he is climbing out of the cabinet itself
+#    a shoe got called a SANDAL    - p-6444, and it is a laced running shoe with a
+#                                    padded collar and a logo on the side
 #
 #  The move is always the same: the photograph shows a SURFACE or a FITTING, and
 #  the place or substance it belongs to is a separate claim. Describe the finish
@@ -255,7 +257,7 @@ PHOTOS = [
     ("p-6411.jpg", "clips", "Jasper & Garnet",
      "Jasper sitting up on the kitchen counter with Garnet lying behind him, seen over a chair back."),
     ("p-6444.jpg", "wave",  "Jasper",
-     "Jasper asleep on the blue shag rug with his head resting on a sandal."),
+     "Jasper asleep on the blue shag rug with his head resting on a running shoe."),
     ("p-6154.jpg", "clips", "Ouiness",
      "Ouiness on stage under a red glitter curtain, a larger line-up with keys, guitars and a disco ball."),
     ("p-6195.jpg", "wave",  "Garnet",
