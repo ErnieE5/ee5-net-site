@@ -333,6 +333,44 @@
   .shot .edgepath .under { fill: none; stroke: #000; stroke-opacity: .55; stroke-width: 5; }
   .shot .edgepath .over  { fill: none; stroke: #cfe4ff; stroke-opacity: .85; stroke-width: 2; }
 
+  /*  THE CAPTION, on hover.  Same sentence as the `alt`, which is the point: a
+      sighted visitor gets told which cat is which, and everyone else already had
+      it.  Marked aria-hidden so the two do not stack up in a screen reader.
+
+      It sits INSIDE the picture rather than below it, because the rail's items are
+      bottom-aligned and a caption hanging underneath would push its own frame up
+      out of line with the others. */
+  .shot .cap-t {
+    position: absolute;
+    left: 50%;
+    bottom: .7rem;
+    transform: translateX(-50%) translateY(.3rem);
+    width: max-content;
+    max-width: calc(100% - 1.8rem);
+    padding: .4rem .6rem;
+    background: rgba(12, 19, 33, .93);
+    border: 1px solid rgba(207, 228, 255, .26);
+    border-radius: 4px;
+    color: #e8eef8;
+    font: .72rem/1.4 var(--mono);
+    text-align: center;
+    text-wrap: balance;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .15s ease, transform .15s ease;
+    z-index: 3;
+  }
+  .shot:hover .cap-t { opacity: 1; transform: translateX(-50%) translateY(0); }
+  @media (prefers-reduced-motion: reduce) {
+    .shot .cap-t { transition: none; }
+  }
+  /*  A hover caption is a pointer affordance. Where there is no hover -- a phone --
+      it would either never appear or stick after a tap, so it is not shown at all;
+      the `alt` still carries the description. */
+  @media (hover: none) {
+    .shot .cap-t { display: none; }
+  }
+
   /*  THE RAIL HAS TO LOOK SCROLLABLE, or it is a row that mysteriously cuts off.  A
       fade at each end says there is more that way; it is decoration only, so the
       real scrollbar stays visible underneath rather than being hidden behind it. */
@@ -431,33 +469,40 @@
       <li class="shot clips">
         <img src="photos/p-0667.jpg" alt="Garnet, a tabby cat with a white bib and white paws, sitting upright on top of a carpeted scratching post."
              width="1200" height="1600" loading="eager" decoding="async">
+        <span class="cap-t" aria-hidden="true">Garnet, a tabby cat with a white bib and white paws, sitting upright on top of a carpeted scratching post.</span>
         <span class="cl ul"></span><span class="cl ur"></span><span class="cl lr"></span><span class="cl ll"></span>
       </li>
       <li class="shot wave">
         <img src="photos/p-0677.jpg" alt="Jasper and Garnet lying side by side on top of a tall white cabinet, peering over the edge."
              width="1200" height="1600" loading="eager" decoding="async">
+        <span class="cap-t" aria-hidden="true">Jasper and Garnet lying side by side on top of a tall white cabinet, peering over the edge.</span>
       </li>
       <li class="shot clips">
         <img src="photos/p-0645.jpg" alt="Garnet looking out from a curved dark cat perch, with Jasper in another perch below, against a wood-panelled wall."
              width="1200" height="1600" loading="eager" decoding="async">
+        <span class="cap-t" aria-hidden="true">Garnet looking out from a curved dark cat perch, with Jasper in another perch below, against a wood-panelled wall.</span>
         <span class="cl ul"></span><span class="cl ur"></span><span class="cl lr"></span><span class="cl ll"></span>
       </li>
       <li class="shot wave">
         <img src="photos/p-0511.jpg" alt="Garnet loafing on a bright blue shag rug and looking at the camera."
              width="1200" height="1600" loading="lazy" decoding="async">
+        <span class="cap-t" aria-hidden="true">Garnet loafing on a bright blue shag rug and looking at the camera.</span>
       </li>
       <li class="shot clips">
         <img src="photos/p-0527.jpg" alt="Jasper curled up asleep in a flat Red Bull box on a wood floor."
              width="1600" height="1200" loading="lazy" decoding="async">
+        <span class="cap-t" aria-hidden="true">Jasper curled up asleep in a flat Red Bull box on a wood floor.</span>
         <span class="cl ul"></span><span class="cl ur"></span><span class="cl lr"></span><span class="cl ll"></span>
       </li>
       <li class="shot wave">
         <img src="photos/p-6328.jpg" alt="Jasper on a maple shelving unit with Garnet on the shelf below, beside black soft-sided pet carriers."
              width="1200" height="1600" loading="lazy" decoding="async">
+        <span class="cap-t" aria-hidden="true">Jasper on a maple shelving unit with Garnet on the shelf below, beside black soft-sided pet carriers.</span>
       </li>
       <li class="shot clips">
         <img src="photos/p-4532.jpg" alt="A house seen from the street on a clear day, with a blue SUV parked in the driveway."
              width="1600" height="1200" loading="lazy" decoding="async">
+        <span class="cap-t" aria-hidden="true">A house seen from the street on a clear day, with a blue SUV parked in the driveway.</span>
         <span class="cl ul"></span><span class="cl ur"></span><span class="cl lr"></span><span class="cl ll"></span>
       </li>
     </ul>
