@@ -34,6 +34,9 @@ from PIL import Image
 #    the shelving got MAPLE        - a species guessed from a colour
 #    a stateroom got a LOUNGE      - p-8701, because the art is big and the
 #                                    lighting built in
+#    a cat got the COUNTER         - p-6512, and he is balanced on the top edge of
+#                                    the open cabinet DOOR, an inch of board with
+#                                    his tail down the inside face of it
 #
 #  The move is always the same: the photograph shows a SURFACE or a FITTING, and
 #  the place or substance it belongs to is a separate claim. Describe the finish
@@ -235,7 +238,7 @@ PHOTOS = [
     ("p-6529.jpg", "wave",  "Jasper",
      "Jasper sitting among the groceries on a pantry shelf, wearing a pink collar."),
     ("p-6512.jpg", "clips", "Jasper",
-     "Jasper perched on the kitchen counter, peering down into an opened cabinet at the pull-out hamper."),
+     "Jasper balanced on the top edge of an open cabinet door, front paws braced against the counter, nosing at the wall."),
     ("p-6566.jpg", "wave",  "Jasper",
      "Jasper looking down from the top of the fridge, in the gap above the kitchen cabinets."),
     ("p-6132.jpg", "clips", "in my drawers",
