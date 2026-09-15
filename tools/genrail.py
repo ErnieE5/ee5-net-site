@@ -46,7 +46,18 @@ from PIL import Image
 #      costs nothing. Cabo 0.6 km, Ensenada 0.6 km, San Juan 0.7 km, St Thomas
 #      1.3 km -- all confirmed. San Diego and Roatan have no GPS (both are edited
 #      exports), so San Diego rests on the Midway being in the frame and ROATAN is
-#      the one caption here still standing on recognition alone.
+#      exports. San Diego rests on the Midway being in the frame.
+#
+#      BRACKETING SETTLED BOTH OF THOSE ANYWAY, his second suggestion carried a
+#      step further: an edited export loses its GPS, but the frames shot either
+#      side of it in the same folder kept theirs, and a ship in port does not move.
+#      Roatan is bracketed at 16.313,-86.544 and 16.270,-86.575, both on the
+#      island. The deck shot is bracketed 98 minutes each way at the Cozumel
+#      piers, 290 m apart, which is one berth and a whole day alongside.
+#
+#      AND IT PROVED THE HAT IS NOT EVIDENCE: the ROATAN hat is being worn at
+#      COZUMEL in that frame. Roatan's caption leaned partly on it, which was the
+#      weakness named at the time; the coordinates carry it now, not the souvenir.
 #  A ROOM IS NOT VISIBLE EITHER, only its furnishings are. p-8701 was called a
 #  "ship's lounge" because the artwork is large and the lighting is built in; it is
 #  his stateroom. Fourth of a kind now, with the cabinet's kitchen, the cat tree's
@@ -140,7 +151,7 @@ PHOTOS = [
     ('p-8986.jpg', 'clips', 'Ernie',
      'Ernie in the ROATAN hat on a balcony above the painted rooftops of Roatán.'),
     ("p-9169.jpg", "wave",  "Ernie",
-     "Ernie in the ROATAN hat and sunglasses, out on deck."),
+     "Ernie in the ROATAN hat and sunglasses, out on deck at Cozumel."),
     ("p-8701.jpg", "clips", "Ernie",
      "Ernie in an orange shirt in his stateroom at Antigua, a large abstract painting behind him."),
     # Not a beast. Published only with the door number and the plate blurred out.
