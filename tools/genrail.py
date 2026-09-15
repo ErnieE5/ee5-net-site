@@ -41,10 +41,21 @@ from PIL import Image
 #                                    and he is climbing out of the cabinet itself
 #    a shoe got called a SANDAL    - p-6444, and it is a laced running shoe with a
 #                                    padded collar and a logo on the side
-#    a roll got called ASLEEP      - p-6444 again. He was ROLLING on the shoe. A
-#                                    still cannot show motion, and a cat with its
-#                                    eyes scrunched mid-roll is indistinguishable
-#                                    from a cat dozing. His, and unguessable.
+#    a roll got called ASLEEP      - p-6444. He was ROLLING on the shoe, rubbing
+#                                    his face along it. Eyes scrunched mid-roll
+#                                    looks exactly like dozing in one frame.
+#
+#  AND THAT LAST ONE WAS NOT UNKNOWABLE, which is the correction worth keeping.
+#  I wrote that a still cannot show motion and only the photographer could know.
+#  Wrong: these are LIVE PHOTOS. IMG_6444.MOV sits beside IMG_6444.HEIC with 2.41
+#  seconds of video in it, and the roll is unmistakable across ten frames. 94 of
+#  the 103 originals have a paired .MOV. The motion was always there; I was
+#  reading half of each original and calling the other half impossible.
+#
+#  To look: ffmpeg -i <original>.MOV -vf fps=4,scale=480:-2 out_%02d.jpg
+#  There is no ffmpeg on PATH here; one is bundled with an unrelated application
+#  at C:\Program Files (x86)\CoolerMaster\MasterPlusfmpeg.exe, which works but
+#  is not something to depend on.
 #
 #  The move is always the same: the photograph shows a SURFACE or a FITTING, and
 #  the place or substance it belongs to is a separate claim. Describe the finish
