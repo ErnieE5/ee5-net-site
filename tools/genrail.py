@@ -48,6 +48,10 @@ from PIL import Image
 #      the wood, which is the whole argument for saying "pale wood" and stopping
 #    - the house in p-4532 is his own
 #    - Jasper is on his LEG in p-9548, not his arm
+#    - OUINESS IS AN ENSEMBLE with different members each time, so it is credited
+#      as a band and nobody in it is named. LINE OF FIRE has been T.J. Wade and
+#      Anne for as long as he has known them, which is why naming those two is
+#      safe and stays consistent across every frame they appear in.
 #
 #  THE PLACES are named with his leave to name them and be corrected. How each
 #  one is known, because the confidence is not uniform:
@@ -203,6 +207,10 @@ PHOTOS = [
      "The band Ouiness playing under a carport, seven of them, with stuffed animals watching from child-sized chairs."),
     ("p-8074.jpg", "clips", "Line of Fire",
      "Anne on drums and T.J. Wade on keys, Line of Fire playing outdoors in the evening."),
+    ("p-6727.jpg", "wave",  "Garnet",
+     "Garnet dozing on top of the fridge with one white paw over the edge, below the kitchen cabinets."),
+    ("p-6680.jpg", "clips", "Line of Fire",
+     "T.J. Wade on keys in a light-up jacket and Anne on drums, Line of Fire under a liquid light show."),
     # Not a beast. Published only with the door number and the plate blurred out.
     ('p-4532.jpg', 'wave',  'home',
      "Ernie's house, seen from the street on a clear day, with a blue SUV parked in the driveway."),
