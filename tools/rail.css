@@ -1,0 +1,160 @@
+  /* --------------------------------------------------------------- the rail -- */
+
+  /*  THE PHOTOGRAPHS ARE A LIST, and the markup says so: a <ul> of <li>, one per
+      picture, each carrying its own frame style as a class.  Adding a photograph is
+      adding a line.  Everything below is presentation over that list, so with the
+      stylesheet gone it is still a legible list of images. */
+  .rail {
+    list-style: none;
+    margin: 0;
+    padding: .6rem .2rem 1rem;
+    display: flex;
+    align-items: flex-end;
+    gap: clamp(1rem, 2.6vw, 2.2rem);
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x proximity;
+    /*  Room for the clips and the wave crests, which both sit OUTSIDE the picture. */
+    padding-left: 1.4rem;
+    padding-right: 1.4rem;
+    scrollbar-width: thin;
+    scrollbar-color: rgba(207,214,230,.35) transparent;
+  }
+  .rail::-webkit-scrollbar { height: 9px; }
+  .rail::-webkit-scrollbar-track { background: rgba(0,0,0,.18); border-radius: 5px; }
+  .rail::-webkit-scrollbar-thumb { background: rgba(207,214,230,.3); border-radius: 5px; }
+  .rail::-webkit-scrollbar-thumb:hover { background: rgba(207,214,230,.5); }
+
+  /*  NOTHING IS CROPPED.  Every picture is given the same HEIGHT and keeps its own
+      aspect, so a portrait is narrow and a landscape is wide and neither is cut to
+      fit a slot.  That is the difference between a rail and a grid, and it is why
+      the rail earned the photographs a scroll instead of a crop. */
+  .shot {
+    position: relative;
+    flex: 0 0 auto;
+    height: clamp(210px, 42vh, 420px);
+    scroll-snap-align: center;
+  }
+  /*  <picture> is a wrapper with no box of its own to contribute: `display: contents`
+      drops it out of the layout so the <img> inside is still a direct flex/relative
+      child of .shot. Without it the image would size against the wrapper's auto
+      height rather than the rail's uniform one, and every frame would collapse. */
+  .shot picture { display: contents; }
+  .shot img {
+    display: block;
+    height: 100%;
+    width: auto;
+    /*  BACKING BOARD. The frame is drawn from width/height before the bytes
+        arrive, so between paint and load there is a lit, clipped, gold-cornered
+        frame with the wall showing straight through it -- which reads as a
+        broken image rather than one still coming. A ground darker than the felt
+        makes that moment read as a mounted plate that has not been printed yet. */
+    background: #12203c;
+    /*  The dark line under everything: easel's own answer to an edge that would not
+        read as an edge against its ground (frames/README.md, 2026-08-30). */
+    box-shadow: 0 0 0 1px rgba(0,0,0,.63), 0 10px 26px rgba(0,0,0,.34);
+  }
+
+  /*  ONE STYLE PER PICTURE, never both.  A frame is a decision about the edge, and
+      two decisions about one edge is an argument.  `clips` keeps the straight edge
+      and hangs metal on the corners; `wave` cuts the edge itself and hangs nothing. */
+
+  /*  CLIPS: the picture stays a rectangle and four metal corners straddle it.  Pure
+      CSS: the artwork is drawn for the upper left, so the other three are the same
+      file turned 90 degrees at a time.
+
+      SIZE IS TAKEN FROM THE HEIGHT, not the width.  Every picture in the rail is the
+      same height and its own width, so a width-derived clip came out 57px on a
+      portrait and 62px on a landscape, and the corners of the wide pictures no
+      longer matched the tall ones standing beside them.
+
+      THE STRADDLE IS A FRACTION OF THE CLIP, not of the picture.  `translate`
+      resolves its percentages against the element's own box, so the overhang is
+      the same on every corner of every picture whatever shape it is.  Offsetting
+      with `left`/`right` instead measured against the PICTURE's width, which is how
+      a 488px landscape ended up throwing its corners 31% out while a 275px portrait
+      threw them 19%.
+
+      PIVOT 10 OF 72, which is where frames/README.md records the walk ending:
+      "pivot 10 -- he walked 16 -> 12 -> 8 -> 10". The 14 used before this is the
+      earlier figure from the open gold form, and it sits the clips too far out. */
+  .shot.clips .cl {
+    position: absolute;
+    height: 15%;
+    aspect-ratio: 1;
+    background: url("clips/clip-gold.png") center / contain no-repeat;
+    pointer-events: none;
+  }
+  .shot.clips .cl.ul { left: 0;  top: 0;    transform: translate(-13.9%, -13.9%); }
+  .shot.clips .cl.ur { right: 0; top: 0;    transform: translate(13.9%, -13.9%) rotate(90deg); }
+  .shot.clips .cl.lr { right: 0; bottom: 0; transform: translate(13.9%, 13.9%) rotate(180deg); }
+  .shot.clips .cl.ll { left: 0;  bottom: 0; transform: translate(-13.9%, 13.9%) rotate(270deg); }
+
+  /*  WAVE: the silhouette itself is the frame, so the picture is clipped to the sine
+      and the same path is stroked over it.  The box-shadow edge cannot follow a
+      clip-path, so it is turned off here and the stroke does that job instead. */
+  .shot.wave img { box-shadow: none; }
+  .shot .edgepath {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    overflow: visible;
+  }
+  .shot .edgepath .under { fill: none; stroke: #000; stroke-opacity: .55; stroke-width: 5; }
+  .shot .edgepath .over  { fill: none; stroke: #cfe4ff; stroke-opacity: .85; stroke-width: 2; }
+
+  /*  THE CAPTION, on hover.  Same sentence as the `alt`, which is the point: a
+      sighted visitor gets told which cat is which, and everyone else already had
+      it.  Marked aria-hidden so the two do not stack up in a screen reader.
+
+      It sits INSIDE the picture rather than below it, because the rail's items are
+      bottom-aligned and a caption hanging underneath would push its own frame up
+      out of line with the others. */
+  .shot .cap-t {
+    position: absolute;
+    left: 50%;
+    bottom: .7rem;
+    transform: translateX(-50%) translateY(.3rem);
+    width: max-content;
+    max-width: calc(100% - 1.8rem);
+    padding: .4rem .6rem;
+    background: rgba(12, 19, 33, .93);
+    border: 1px solid rgba(207, 228, 255, .26);
+    border-radius: 4px;
+    color: #e8eef8;
+    font: .72rem/1.4 var(--mono);
+    text-align: center;
+    text-wrap: balance;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .15s ease, transform .15s ease;
+    z-index: 3;
+  }
+  .shot:hover .cap-t { opacity: 1; transform: translateX(-50%) translateY(0); }
+  @media (prefers-reduced-motion: reduce) {
+    .shot .cap-t { transition: none; }
+  }
+  /*  A hover caption is a pointer affordance. Where there is no hover -- a phone --
+      it would either never appear or stick after a tap, so it is not shown at all;
+      the `alt` still carries the description. */
+  @media (hover: none) {
+    .shot .cap-t { display: none; }
+  }
+
+  /*  THE RAIL HAS TO LOOK SCROLLABLE, or it is a row that mysteriously cuts off.  A
+      fade at each end says there is more that way; it is decoration only, so the
+      real scrollbar stays visible underneath rather than being hidden behind it. */
+  .railwrap { position: relative; }
+  .railwrap::before, .railwrap::after {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0;
+    width: clamp(1.4rem, 3vw, 3rem);
+    pointer-events: none;
+    z-index: 2;
+  }
+  .railwrap::before { left: 0;  background: linear-gradient(90deg, var(--felt), rgba(27,42,78,0)); }
+  .railwrap::after  { right: 0; background: linear-gradient(270deg, var(--felt), rgba(27,42,78,0)); }
+  .rail:focus-visible { outline: 2px solid var(--cur); outline-offset: -2px; }
